@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chile 2026 · Boda & Viaje</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F6FA; --card:#FFFFFF; --ink:#0F1E33; --ink2:#43556B; --muted:#5A6B80; --line:#E4EAF2; --line2:#D5DEE9;
+  --navy:#0F1E33; --navy2:#1E3757; --navy3:#17304F; --sky:#C9D6E6;
+  --red:#D7372F; --red-d:#A82620; --red-bg:#FCE9E7; --red-ink:#8F1F19;
+  --sun:#FFC93C; --sun-bg:#FFF4D1; --ok:#2F7D4F;
+  --r:20px; --shadow:0 1px 2px rgba(15,30,51,.06),0 8px 24px rgba(15,30,51,.06);
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Instrument Sans",system-ui,sans-serif;font-size:15px;line-height:1.5}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.1;margin:0;letter-spacing:-.01em}
+a{color:var(--red)} a:hover{color:var(--red-d)}
+button{font:inherit;cursor:pointer;color:inherit}
+input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+/* header */
+header{background:var(--navy);color:#fff;position:relative;overflow:hidden}
+header .mtn{position:absolute;right:0;bottom:0;width:70%;height:200px;pointer-events:none}
+header .wrap{position:relative;padding-top:24px;display:flex;flex-direction:column;gap:24px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+.brand .logo{width:36px;height:36px;border-radius:10px;background:var(--red);display:inline-flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:15px}
+.lang{display:flex;gap:4px;background:var(--navy2);border-radius:999px;padding:4px}
+.lang button{border:0;background:transparent;color:#fff;padding:8px 14px;min-height:36px;border-radius:999px;font-weight:700;font-size:13px}
+.lang button.on{background:#fff;color:var(--navy)}
+.hero{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px}
+.hero-txt{display:flex;flex-direction:column;gap:12px;max-width:640px}
+.kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--sun);font-weight:700}
+header h1{font-size:clamp(38px,6vw,64px);line-height:.95;letter-spacing:-.02em}
+.sub{font-size:17px;color:var(--sky)}
+.count{display:flex;align-items:center;gap:14px;background:var(--sun);color:var(--navy);border-radius:18px;padding:14px 20px}
+.count .num{font-family:var(--display);font-weight:800;font-size:30px;line-height:1}
+.count .lbl{font-size:13px;font-weight:600}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap}
+nav.tabs button{border:0;background:transparent;color:var(--sky);padding:12px 18px;border-radius:14px 14px 0 0;font-weight:600;display:inline-flex;align-items:center;gap:8px;min-height:44px}
+nav.tabs button svg{width:18px;height:18px;flex-shrink:0}
+nav.tabs button .s{display:none}
+nav.tabs button.on{background:var(--bg);color:var(--ink);font-weight:700}
+
+main.wrap{padding-top:28px;padding-bottom:64px}
+section.view{display:none}
+section.view.on{display:block}
+.card{background:var(--card);border-radius:var(--r);padding:24px;box-shadow:var(--shadow)}
+.card+.card{margin-top:18px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.notice{background:#FFF8E1;border:1px solid #F3DC9A;border-radius:16px;padding:14px 16px;margin-bottom:18px}
+.notice.err{background:var(--red-bg);border-color:#F2B8B3}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line2);background:#fff;border-radius:12px;padding:10px 16px;font-weight:600;min-height:44px}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.btn.primary:hover{background:var(--red-d)}
+.btn.ghost{background:transparent;border-color:transparent}
+.btn.danger{color:var(--red-d)}
+.btn:disabled{opacity:.5;cursor:default}
+.h2row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.h2row h2{font-size:26px}
+
+/* who's where */
+.who-grid{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start}
+.tlcard{flex:999 1 640px;min-width:0;display:flex;flex-direction:column;gap:16px}
+#daypanel{flex:1 1 300px;min-width:280px}
+#daypanel:empty{display:none}
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line2);background:#fff;border-radius:999px;padding:7px 14px 7px 8px;font-size:14px;font-weight:600;min-height:36px;text-decoration:none;color:var(--ink)}
+.chip i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.chip.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.tl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#fff}
+table.tl{border-collapse:separate;border-spacing:0;min-width:100%}
+table.tl th,table.tl td{padding:0;height:52px;border-bottom:1px solid #EEF2F7}
+table.tl thead th{background:#F8FAFC;border-bottom:1px solid var(--line)}
+table.tl th.day{min-width:38px;width:38px;font-size:11px;font-weight:600;color:var(--ink);text-align:center;cursor:pointer;line-height:1.15;user-select:none;vertical-align:middle}
+table.tl th.day b{display:block;font-size:15px;font-weight:700}
+table.tl th.day.we{background:#EEF2F7}
+table.tl th.day.wed{background:var(--sun);border-radius:10px 10px 0 0}
+table.tl th.day.sel{box-shadow:inset 0 -3px 0 var(--red)}
+table.tl .name{position:sticky;left:0;background:#fff;z-index:2;min-width:150px;max-width:170px;padding:0 12px;text-align:left;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+table.tl thead .name{background:#F8FAFC;font-size:12px;color:var(--muted)}
+table.tl .name .av{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--line);font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:10px;vertical-align:middle}
+table.tl td.wedcol{background:var(--sun-bg)}
+table.tl tr.cnt td{height:64px;vertical-align:bottom}
+table.tl tr.cnt .name{font-weight:700;color:var(--red-d);font-size:12px;vertical-align:bottom;padding-bottom:12px}
+.cntcell{text-align:center;padding-bottom:8px !important}
+.cntcell .n{display:block;font-size:11px;font-weight:700;color:var(--red-d)}
+.cntcell .b{display:inline-block;width:18px;border-radius:5px 5px 2px 2px;background:#F2A49E}
+.cntcell .b.w{background:var(--red)}
+td.seg{padding:9px 2px !important}
+.bar{height:34px;border-radius:10px;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar.dark{color:var(--navy)}
+.bar.dim{opacity:.18}
+tr.me .name{color:var(--red-d)}
+.name .edit{border:0;background:none;color:var(--muted);padding:0 0 0 6px;font-size:13px;min-height:32px}
+.daypanel{display:flex;flex-direction:column;gap:16px}
+.daypanel .eyebrow{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8A5A00}
+.daypanel h3{font-size:26px}
+.grp{display:flex;flex-direction:column;gap:8px}
+.grp .gh{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.grp .gh span:first-child{display:inline-flex;align-items:center;gap:8px}
+.grp .gh i{width:12px;height:12px;border-radius:50%;display:inline-block}
+.grp .gh .c{font-size:13px;color:var(--muted)}
+.grp .ppl{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:var(--red-bg);color:var(--red-ink);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600}
+.pill.other{background:#EEF2F7;color:var(--ink)}
+.empty{text-align:center;padding:40px 16px}
+.hint{font-size:13px;color:var(--muted);margin:0}
+
+/* editor */
+.stop{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr auto;gap:10px;align-items:end;padding:14px;margin:10px 0;border-radius:16px;background:#F8FAFC;border:1px solid var(--line)}
+.stop label,.field label{display:block;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:4px}
+.stop input,.field input,.field select,.mbox textarea{width:100%;border:1px solid #C8D3E1;border-radius:12px;padding:10px 12px;background:#fff;min-height:44px}
+.stop .x{border:0;background:#EEF2F7;color:var(--muted);font-size:20px;width:44px;height:44px;border-radius:12px}
+.field{margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.saved{color:var(--ok);font-weight:700}
+
+/* guide */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.g{background:#fff;border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow);padding:0}
+.g .gb{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+.g h3{font-size:21px}
+.g .tag{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--red-d);font-weight:700}
+.g ul{margin:2px 0 0;padding-left:18px;color:var(--ink2)}
+.g li{margin:2px 0}
+.g .gb>span:not(.tag):not(.small){color:var(--ink2)}
+.g .tip{font-size:13px;background:var(--sun-bg);border-radius:12px;padding:8px 12px;margin-top:auto;color:#5C4300}
+.g img.ph{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;cursor:zoom-in;background:#F7DCC8}
+.g .addr{text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.cards.tight{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.cards.tight .g .gb{padding:16px}
+.sec{margin:36px 0 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sec:first-child{margin-top:8px}
+.sec h2{font-size:clamp(28px,4vw,40px)}
+.sec .emoji{font-size:30px}
+.catnav{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.catnav a{text-decoration:none;color:var(--ink)}
+.card .dish,.dish{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
+.dish span{background:var(--red-bg);color:var(--red-ink);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700}
+.disclaimer{font-size:13px;color:var(--muted);margin-top:28px}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28px}
+
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  header .wrap{padding-top:18px;gap:16px}
+  header .mtn{width:100%;height:120px}
+  .sub{font-size:15px}
+  .count{padding:10px 14px;width:100%}
+  .count .num{font-size:24px}
+  nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;padding:4px 2px calc(8px + env(safe-area-inset-bottom))}
+  nav.tabs button{flex-direction:column;gap:2px;border-radius:10px;padding:6px 2px;font-size:11px;color:var(--muted)}
+  nav.tabs button .l{display:none}
+  nav.tabs button .s{display:block}
+  nav.tabs button.on{background:transparent;color:var(--ink)}
+  nav.tabs button.on svg{color:var(--red)}
+  main.wrap{padding-top:18px;padding-bottom:110px}
+  footer{padding-bottom:100px}
+  .card{padding:16px}
+  .stop{grid-template-columns:1fr 1fr}
+  .stop .p,.stop .n{grid-column:1/-1}
+  .stop .x{grid-column:2;justify-self:end}
+  .grid2{grid-template-columns:1fr}
+  table.tl .name{min-width:96px;max-width:110px;padding:0 8px}
+  table.tl .name .av{display:none}
+}
+.edbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px;position:sticky;top:8px;z-index:5}
+.ctl{display:inline-flex;gap:4px;margin-left:auto}
+.ctl button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:3px 9px;font-size:13px}
+.ctl button:disabled{opacity:.35}
+.ictl{margin-top:8px;margin-left:0}
+.g .addr{text-decoration:none}
+.addcard{border:2px dashed var(--line2);box-shadow:none;background:transparent;color:var(--muted);min-height:120px;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.mo{position:fixed;inset:0;background:rgba(20,16,12,.5);z-index:50;display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow:auto}
+.mbox{background:#fff;border-radius:16px;padding:20px;width:100%;max-width:720px}
+.mbox h3{font-size:22px;margin-bottom:6px}
+.mbox textarea{resize:vertical}
+.phbox{display:flex;flex-direction:column;gap:8px}
+.phbox img{max-width:260px;border-radius:10px;aspect-ratio:auto}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:60;display:flex;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}
+.lb img{max-width:100%;max-height:100%;border-radius:8px}
+</style>
+</head>
+<body>
+<header>
+  <svg class="mtn" viewBox="0 0 900 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0 220 L120 120 L190 160 L300 40 L380 120 L470 70 L560 150 L640 95 L760 170 L900 110 L900 220 Z" fill="#17304F"/><path d="M300 40 L330 75 L300 70 L275 78 Z M470 70 L492 95 L468 92 L452 98 Z" fill="#fff" opacity=".85"/></svg>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand"><span class="logo">26</span><span data-i="brand"></span></div>
+      <div class="lang" role="group" aria-label="Language">
+        <button data-lang="es">ES</button><button data-lang="en">EN</button>
+      </div>
+    </div>
+    <div class="hero">
+      <div class="hero-txt">
+        <div class="kicker" data-i="kicker"></div>
+        <h1 data-i="title"></h1>
+        <div class="sub" data-i="subtitle"></div>
+      </div>
+      <div id="countdown"></div>
+    </div>
+    <nav class="tabs" id="tabs" aria-label="Secciones">
+      <button data-tab="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><span class="l" data-i="tabWho"></span><span class="s" data-i="tabWhoS"></span></button>
+      <button data-tab="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg><span class="l" data-i="tabMine"></span><span class="s" data-i="tabMineS"></span></button>
+      <button data-tab="see"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V10l7-5 7 5v11M9 21v-6h6v6"/></svg><span class="l" data-i="tabSee"></span><span class="s" data-i="tabSeeS"></span></button>
+      <button data-tab="eat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 3c-2 0-3 2-3 5s1 4 3 4v9"/></svg><span class="l" data-i="tabEat"></span><span class="s" data-i="tabEatS"></span></button>
+      <button data-tab="tips"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><span class="l" data-i="tabTips"></span><span class="s" data-i="tabTipsS"></span></button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="view" id="v-who">
+    <div id="who-status"></div>
+    <div class="who-grid">
+      <div class="card tlcard">
+        <div class="h2row" style="margin:0"><h2 data-i="whoTitle"></h2><button class="btn primary" id="addMine" data-i="addMine"></button></div>
+        <div class="legend" id="legend"></div>
+        <div class="tl-scroll"><table class="tl" id="tl"></table></div>
+        <p class="hint" data-i="whoHint"></p>
+      </div>
+      <div id="daypanel"></div>
+    </div>
+  </section>
+
+  <section class="view" id="v-mine">
+    <div id="mine-status"></div>
+    <div class="card" id="editor"></div>
+    <div class="card" id="settings" hidden></div>
+  </section>
+
+  <section class="view" id="v-see"><div id="see"></div></section>
+  <section class="view" id="v-eat"><div id="eat"></div></section>
+  <section class="view" id="v-tips"><div id="tips"></div></section>
+</main>
+<footer data-i="footer"></footer>
+
+<datalist id="places"></datalist>
+
+<script type="module">
+/* ============ i18n ============ */
+const T = {
+  es:{
+    kicker:"Boda en Santiago · Diciembre 2026",
+    title:"¿Quién está dónde?",
+    subtitle:"Anota tus fechas, mira quién coincide contigo en Santiago o de viaje, y usa la guía para comer, tomar y pasear como local.",
+    tabWho:"Quién está dónde", tabMine:"Mi itinerario", tabSee:"Qué ver", tabEat:"Comer y tomar", tabTips:"Tips", tabWhoS:"Calendario", tabMineS:"Mi viaje", tabSeeS:"Ver", tabEatS:"Comer", tabTipsS:"Tips", brand:"Chile · Boda & Viaje", addMine:"+ Anotar mis fechas", daysWord:"días", wedEyebrow:"Día de la boda", dayEyebrow:"Día seleccionado", people1:"persona", peopleN:"personas", whereEat:"¿Dónde comer?",
+    whoTitle:"Calendario del grupo", whoHint:"Toca un día para ver quién está dónde. La columna amarilla es el día de la boda.",
+    inSantiago:"En Santiago", noData:"Sin datos",
+    daysTo:"para la boda", weddingToday:"¡La boda es hoy! 💍", weddingPast:"La boda ya pasó — ¡qué fiesta!",
+    loading:"Cargando itinerarios…", slow:"Los itinerarios están tardando en cargar. Revisa tu conexión; esta página se actualiza sola.",
+    noDb:"La base de datos no está configurada todavía: falta pegar la configuración de Firebase en el archivo (ver README).",
+    revoked:"Ya no tienes acceso a los itinerarios en esta página.",
+    empty:"Todavía nadie se ha anotado. ¡Sé el primero en “Mi itinerario”!",
+    dayOf:"¿Quién está dónde el", wedding:"Boda",
+    edTitle:"Mi itinerario", edFor:"Editando a", edMe:"Yo", edNew:"+ Agregar a un amigo (sin cuenta)",
+    edName:"Tu nombre (como te conocen en el grupo)", edNameFriend:"Nombre del amigo",
+    edStops:"Paradas", edPlace:"Lugar", edFrom:"Desde", edTo:"Hasta", edNote:"Nota (vuelo, hotel, plan…)",
+    edAdd:"+ Agregar parada", edSave:"Guardar", edDelete:"Borrar este itinerario", edSaved:"¡Guardado! ✓",
+    edHelp:"Agrega una fila por lugar. Ejemplo: Santiago 8–14 dic, San Pedro de Atacama 15–19 dic. Si un día viajas, puedes poner ese día en ambas paradas.",
+    edErrName:"Escribe un nombre.", edErrDates:"Revisa las fechas: cada parada necesita lugar, desde y hasta (desde ≤ hasta).",
+    edNoWrite:"No se pudo guardar: la base de datos rechazó el cambio. Revisa las reglas de Firestore.",
+    edFail:"No se pudo guardar. Intenta de nuevo en un momento.", edConfirmDel:"¿Seguro? Toca de nuevo para borrar.",
+    edWaiting:"Inicia sesión para editar tu itinerario.",
+    stTitle:"Ajustes del evento", stWedDate:"Fecha de la boda", stWedPlace:"Lugar de la boda",
+    stStart:"Calendario desde", stEnd:"Calendario hasta", stSave:"Guardar ajustes",
+    footer:"Hecho con cariño para la boda · Cualquiera con el link puede ver y editar",
+    seeTitle:"Barrios para recorrer", bldTitle:"Edificios y lugares que valen la pena", tripsTitle:"Escapadas desde Santiago",
+    eatIntro:"Ordenado por tipo. Las direcciones y horarios cambian: revisa en Google Maps antes de ir, sobre todo en Navidad y Año Nuevo.",
+    tipsTitle:"Tips prácticos para diciembre", slangTitle:"Chileno básico",
+    dishes:"Pide", where:"Dónde",
+    disclaimer:"Lista armada en noviembre de 2026. Algunos locales cierran o cambian de dirección: confirma antes de ir."
+  },
+  en:{
+    kicker:"Wedding in Santiago · December 2026",
+    title:"Who's where?",
+    subtitle:"Add your dates, see who overlaps with you in Santiago or on the road, and use the guide to eat, drink and wander like a local.",
+    tabWho:"Who's where", tabMine:"My itinerary", tabSee:"What to see", tabEat:"Eat & drink", tabTips:"Tips", tabWhoS:"Calendar", tabMineS:"My trip", tabSeeS:"See", tabEatS:"Eat", tabTipsS:"Tips", brand:"Chile · Wedding & Trip", addMine:"+ Add my dates", daysWord:"days", wedEyebrow:"Wedding day", dayEyebrow:"Selected day", people1:"person", peopleN:"people", whereEat:"Where to eat?",
+    whoTitle:"Group calendar", whoHint:"Tap a day to see who's where. The yellow column is the wedding day.",
+    inSantiago:"In Santiago", noData:"No data",
+    daysTo:"to the wedding", weddingToday:"The wedding is today! 💍", weddingPast:"The wedding has happened — what a party!",
+    loading:"Loading itineraries…", slow:"Itineraries are taking a while. Check your connection; this page updates by itself.",
+    noDb:"The database isn't configured yet: the Firebase config still needs to be pasted into the file (see README).",
+    revoked:"You no longer have access to the itineraries on this page.",
+    empty:"Nobody has signed up yet. Be the first in “My itinerary”!",
+    dayOf:"Who's where on", wedding:"Wedding",
+    edTitle:"My itinerary", edFor:"Editing", edMe:"Me", edNew:"+ Add a friend (no account)",
+    edName:"Your name (as the group knows you)", edNameFriend:"Friend's name",
+    edStops:"Stops", edPlace:"Place", edFrom:"From", edTo:"To", edNote:"Note (flight, hotel, plan…)",
+    edAdd:"+ Add stop", edSave:"Save", edDelete:"Delete this itinerary", edSaved:"Saved! ✓",
+    edHelp:"One row per place. Example: Santiago Dec 8–14, San Pedro de Atacama Dec 15–19. On a travel day you can put that date in both stops.",
+    edErrName:"Please enter a name.", edErrDates:"Check the dates: each stop needs a place, from and to (from ≤ to).",
+    edNoWrite:"Couldn't save: the database rejected the change. Check the Firestore rules.",
+    edFail:"Couldn't save. Try again in a moment.", edConfirmDel:"Sure? Tap again to delete.",
+    edWaiting:"Sign in to edit your itinerary.",
+    stTitle:"Event settings", stWedDate:"Wedding date", stWedPlace:"Wedding venue",
+    stStart:"Calendar from", stEnd:"Calendar to", stSave:"Save settings",
+    footer:"Made with love for the wedding · Anyone with the link can view and edit",
+    seeTitle:"Neighborhoods to explore", bldTitle:"Buildings & places worth a visit", tripsTitle:"Getaways from Santiago",
+    eatIntro:"Sorted by type. Addresses and hours change: check Google Maps before going, especially around Christmas and New Year.",
+    tipsTitle:"Practical tips for December", slangTitle:"Basic Chilean",
+    dishes:"Order", where:"Where",
+    disclaimer:"List put together in November 2026. Places close or move: double-check before you go."
+  }
+};
+let lang = 'es';
+try{ lang = localStorage.getItem('lang') || ((navigator.language||'es').startsWith('es')?'es':'en'); }catch(e){ lang = (navigator.language||'es').startsWith('es')?'es':'en'; }
+const t = k => (T[lang][k] ?? k);
+const L = o => (o && typeof o==='object') ? (o[lang] ?? o.es) : o;
+
+/* ============ helpers ============ */
+function el(tag, attrs, ...kids){
+  const n = document.createElement(tag);
+  if(attrs) for(const [k,v] of Object.entries(attrs)){
+    if(v==null || v===false) continue;
+    if(k==='class') n.className=v;
+    else if(k==='style') n.style.cssText=v;
+    else if(k.startsWith('on')) n.addEventListener(k.slice(2), v);
+    else if(k==='text') n.textContent=v;
+    else n.setAttribute(k, v===true?'':v);
+  }
+  for(const c of kids.flat()){ if(c==null||c===false) continue; n.append(c.nodeType?c:document.createTextNode(String(c))); }
+  return n;
+}
+const $ = s => document.querySelector(s);
+const iso = d => d.toISOString().slice(0,10);
+const parse = s => new Date(s+'T00:00:00Z');
+function dayList(a,b){ const out=[]; let d=parse(a), e=parse(b); if(isNaN(d)||isNaN(e)||d>e) return out; while(d<=e && out.length<120){ out.push(iso(d)); d=new Date(d.getTime()+864e5); } return out; }
+const isDate = s => typeof s==='string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
+const fmtDay = s => parse(s).toLocaleDateString(lang==='es'?'es-CL':'en-GB',{weekday:'long',day:'numeric',month:'long',timeZone:'UTC'});
+
+/* ============ places & colors ============ */
+const KNOWN = [
+  ["Santiago","#D7372F"],["Valparaíso","#157272"],["Viña del Mar","#2B9FB0"],["Cajón del Maipo","#3B7A3A"],
+  ["Valle de Casablanca","#7A4E9E"],["Valle de Colchagua","#8A2D5C"],["San Pedro de Atacama","#E8892B"],
+  ["La Serena / Valle del Elqui","#E9B949"],["Pucón","#2F6B4A"],["Puerto Varas","#4C6FBF"],["Chiloé","#2E7D8F"],
+  ["Torres del Paine / Puerto Natales","#2E5FA8"],["Punta Arenas","#5B6B7A"],["Rapa Nui / Isla de Pascua","#A0522D"],
+  ["Mendoza (AR)","#8E2847"],["Buenos Aires (AR)","#7FB2E5"],["Volando / Flying","#9AA5B4"]
+];
+const PALETTE = ["#E07A5F","#3D405B","#81B29A","#B5838D","#6D597A","#457B9D","#A8763E","#588157","#BC4749","#264653","#F4A259","#7F5539"];
+function isLight(hex){ const m=/^#?([0-9a-f]{6})$/i.exec(hex||''); if(!m) return false; const n=parseInt(m[1],16); const r=n>>16&255,g=n>>8&255,b=n&255; return (0.299*r+0.587*g+0.114*b)>165; }
+const norm = s => (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+function colorFor(place){
+  const n=norm(place);
+  for(const [p,c] of KNOWN){ const pn=norm(p); if(n===pn || (n.length>3 && pn.includes(n)) || (pn.length>3 && n.includes(pn.split(' ')[0]) && pn.split(' ')[0].length>4)) return c; }
+  let h=0; for(const ch of n) h=(h*31+ch.charCodeAt(0))>>>0; return PALETTE[h%PALETTE.length];
+}
+const isSantiago = p => norm(p).startsWith('santiago') || norm(p)==='stgo';
+
+/* ============ state ============ */
+const S = { trips:new Map(), config:{}, db:null, user:null, me:null, isOwner:false, dbState:'loading', selDay:null, filter:null, editingId:null, readOnly:false, names:{} };
+const cfg = () => ({ start: isDate(S.config.start)?S.config.start:'2026-12-01', end: isDate(S.config.end)?S.config.end:'2026-12-31', weddingDate: isDate(S.config.weddingDate)?S.config.weddingDate:null, weddingPlace: typeof S.config.weddingPlace==='string'?S.config.weddingPlace:'' });
+const cleanTrip = (id, d) => ({ id, name: typeof d.name==='string'?d.name.slice(0,60):'', stops: Array.isArray(d.stops)? d.stops.filter(s=>s&&typeof s==='object').map(s=>({place:String(s.place||'').slice(0,60), from:isDate(s.from)?s.from:'', to:isDate(s.to)?s.to:'', note:String(s.note||'').slice(0,140)})) : [] });
+
+/* ============ static text ============ */
+function applyI18n(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i]').forEach(n=> n.textContent = t(n.dataset.i));
+  document.querySelectorAll('.lang button').forEach(b=> b.classList.toggle('on', b.dataset.lang===lang));
+  const dl=$('#places'); dl.replaceChildren(...KNOWN.map(([p])=>el('option',{value:p})));
+}
+function renderCountdown(){
+  const c=cfg(), box=$('#countdown'); box.replaceChildren();
+  if(!c.weddingDate) return;
+  const today = new Date(); const t0 = Date.UTC(today.getFullYear(),today.getMonth(),today.getDate());
+  const diff = Math.round((parse(c.weddingDate).getTime()-t0)/864e5);
+  const ring='<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0F1E33" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="15" r="6"/><path d="M9 4h6l-3 5z"/></svg>';
+  const icon=el('span'); icon.innerHTML=ring;
+  const wd=parse(c.weddingDate).toLocaleDateString(lang==='es'?'es-CL':'en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'});
+  const lbl=[t('daysTo')+' · '+wd, c.weddingPlace? ' · '+c.weddingPlace : ''].join('');
+  box.append(el('div',{class:'count'}, icon, el('div',{style:'display:flex;flex-direction:column'},
+    diff>0? el('span',{class:'num',text:diff+' '+t('daysWord')}) : el('span',{class:'num',style:'font-size:22px',text: diff===0?t('weddingToday'):t('weddingPast')}),
+    diff>0? el('span',{class:'lbl',text:lbl}) : null)));
+}
+function renderAll(){ applyI18n(); renderCountdown(); renderWho(); renderEditor(); renderSettings(); renderSee(); renderEat(); renderTips(); }
+
+/* ============ tabs ============ */
+const TABS=['who','mine','see','eat','tips'];
+function showTab(id){
+  if(!TABS.includes(id)) id='who';
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));
+  document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+id));
+}
+$('#tabs').addEventListener('click',e=>{ const b=e.target.closest('button[data-tab]'); if(!b) return; location.hash=b.dataset.tab; showTab(b.dataset.tab); });
+window.addEventListener('hashchange',()=>showTab(location.hash.slice(1)));
+$('#addMine').addEventListener('click',()=>{ S.editingId=S.me; location.hash='mine'; showTab('mine'); window.scrollTo({top:0,behavior:'smooth'}); });
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ lang=b.dataset.lang; try{localStorage.setItem('lang',lang)}catch(e){} renderAll(); }));
+
+/* ============ WHO'S WHERE ============ */
+function placesOn(trip, d){ const out=[]; for(const s of trip.stops){ if(s.place && s.from && s.to && s.from<=d && d<=s.to && !out.includes(s.place.trim())) out.push(s.place.trim()); } return out; }
+function sortedTrips(){ return [...S.trips.values()].filter(x=>x.name||x.stops.length).sort((a,b)=>{ if(a.id===S.me) return -1; if(b.id===S.me) return 1; return (a.name||'').localeCompare(b.name||''); }); }
+function statusBox(container){
+  const box=$(container); box.replaceChildren();
+  if(S.dbState==='nodb') box.append(el('div',{class:'notice',text:t('noDb')}));
+  else if(S.dbState==='revoked') box.append(el('div',{class:'notice err',text:t('revoked')}));
+  else if(S.dbState==='loading') box.append(el('div',{class:'notice',text:t('loading')}));
+  else if(S.dbState==='slow') box.append(el('div',{class:'notice',text:t('slow')}));
+}
+function renderWho(){
+  statusBox('#who-status');
+  const c=cfg(), days=dayList(c.start,c.end), trips=sortedTrips();
+  // legend
+  const allPlaces=[]; trips.forEach(tr=>tr.stops.forEach(s=>{ const p=s.place.trim(); if(p && !allPlaces.some(x=>norm(x)===norm(p))) allPlaces.push(p); }));
+  allPlaces.sort((a,b)=> (isSantiago(b)-isSantiago(a)) || a.localeCompare(b));
+  $('#legend').replaceChildren(...allPlaces.map(p=> el('button',{class:'chip'+(S.filter&&norm(S.filter)===norm(p)?' on':''), onclick:()=>{ S.filter = (S.filter&&norm(S.filter)===norm(p))?null:p; renderWho(); }}, el('i',{style:'background:'+colorFor(p)}), p)));
+  const tbl=$('#tl'); tbl.replaceChildren();
+  // header
+  const hr=el('tr',null, el('th',{class:'name'}, ''));
+  days.forEach(d=>{
+    const dt=parse(d), wd=dt.getUTCDay();
+    const cls=['day']; if(wd===0||wd===6) cls.push('we'); if(d===c.weddingDate) cls.push('wed'); if(d===(S.selDay||c.weddingDate)) cls.push('sel');
+    const wl=dt.toLocaleDateString(lang==='es'?'es-CL':'en-GB',{weekday:'narrow',timeZone:'UTC'});
+    hr.append(el('th',{class:cls.join(' '), title: d===c.weddingDate? t('wedding'):fmtDay(d), onclick:()=>{ S.selDay = d; renderWho(); }}, wl, el('b',{text:String(dt.getUTCDate())})));
+  });
+  tbl.append(el('thead',null,hr));
+  const tb=el('tbody');
+  // santiago count row
+  if(trips.length){
+    const cr=el('tr',{class:'cnt'}, el('td',{class:'name',text:t('inSantiago')}));
+    const cnt=days.map(d=>trips.filter(tr=>placesOn(tr,d).some(isSantiago)).length);
+    const max=Math.max(1,...cnt);
+    days.forEach((d,i)=>{ const n=cnt[i]; cr.append(el('td',{class:'cntcell'}, n? el('span',{class:'n',text:String(n)}):null, n? el('span',{class:'b'+(d===c.weddingDate?' w':''),style:'height:'+Math.round(6+28*n/max)+'px'}):null)); });
+    tb.append(cr);
+  }
+  trips.forEach(tr=>{
+    const canEdit = tr.id===S.me || S.isOwner;
+    const row=el('tr',{class: tr.id===S.me?'me':null},
+      el('td',{class:'name',title:tr.name}, el('span',{class:'av',text:(tr.name||'?').trim().slice(0,2).toUpperCase()}), tr.name||'—', canEdit? el('button',{class:'edit',title:'edit',onclick:()=>{ S.editingId=tr.id; renderEditor(); location.hash='mine'; showTab('mine'); }},'✎'):null));
+    // runs
+    let i=0;
+    while(i<days.length){
+      const key=placesOn(tr,days[i]); const k=key.join('→'); let j=i+1;
+      while(j<days.length && placesOn(tr,days[j]).join('→')===k) j++;
+      const span=j-i;
+      if(!key.length){ for(let q=i;q<j;q++) row.append(el('td',{class: days[q]===c.weddingDate?'wedcol':null})); }
+      else{
+        const cols=key.map(colorFor);
+        const bg= cols.length===1? cols[0] : `linear-gradient(90deg,${cols.join(',')})`;
+        const dim = S.filter && !key.some(p=>norm(p)===norm(S.filter));
+        const notes = tr.stops.filter(s=>key.includes(s.place.trim()) && s.note).map(s=>s.note).join(' · ');
+        row.append(el('td',{class:'seg',colspan:span}, el('div',{class:'bar'+(dim?' dim':'')+(cols.length===1&&isLight(cols[0])?' dark':''),style:'background:'+bg, title: k + (notes?'\n'+notes:'')}, span>=2? k : key[0].slice(0,3))));
+      }
+      i=j;
+    }
+    tb.append(row);
+  });
+  tbl.append(tb);
+  if(!trips.length && (S.dbState==='ready')){ tbl.replaceChildren(el('tr',null, el('td',{class:'empty muted',text:t('empty')}))); }
+  renderDayPanel(trips);
+}
+function renderDayPanel(trips){
+  const box=$('#daypanel'); box.replaceChildren();
+  const c=cfg(); const day=S.selDay||c.weddingDate;
+  if(!day || !trips.length) return;
+  const groups=new Map(); const none=[];
+  trips.forEach(tr=>{ const ps=placesOn(tr,day); if(!ps.length) none.push(tr.name||'—'); ps.forEach(p=>{ const k=[...groups.keys()].find(x=>norm(x)===norm(p))||p; if(!groups.has(k)) groups.set(k,[]); groups.get(k).push(tr.name||'—'); }); });
+  const ordered=[...groups.entries()].sort((a,b)=> (isSantiago(b[0])-isSantiago(a[0])) || b[1].length-a[1].length);
+  const isWed = day===c.weddingDate;
+  const title=fmtDay(day); 
+  box.append(el('div',{class:'card daypanel'},
+    el('div',{style:'display:flex;flex-direction:column;gap:4px'}, el('span',{class:'eyebrow',text: isWed?t('wedEyebrow'):t('dayEyebrow')}), el('h3',{text:title.charAt(0).toUpperCase()+title.slice(1)})),
+    ordered.map(([p,ppl])=> el('div',{class:'grp'},
+      el('div',{class:'gh'}, el('span',null, el('i',{style:'background:'+colorFor(p)}), p), el('span',{class:'c',text:ppl.length+' '+(ppl.length===1?t('people1'):t('peopleN'))})),
+      el('div',{class:'ppl'}, ppl.map(n=>el('span',{class:'pill'+(isSantiago(p)?'':' other'),text:n}))))),
+    none.length? el('div',{class:'grp'}, el('div',{class:'gh'}, el('span',{class:'c',text:t('noData')})), el('div',{class:'ppl'}, none.map(n=>el('span',{class:'pill other',style:'opacity:.7',text:n})))):null,
+    el('a',{href:'#eat',style:'display:flex;justify-content:space-between;align-items:center;text-decoration:none;background:#F3F6FA;color:#0F1E33;border-radius:14px;padding:14px 16px;font-weight:700',onclick:e=>{ e.preventDefault(); location.hash='eat'; showTab('eat'); }}, t('whereEat'), el('span',{'aria-hidden':'true'},'→'))
+  ));
+}
+
+/* ============ EDITOR ============ */
+let draft=null, draftFor=undefined, delArmed=false, dirty=false;
+document.addEventListener('input',e=>{ if(e.target.closest && e.target.closest('#editor')) dirty=true; });
+function loadDraft(){
+  const id=S.editingId;
+  const src=S.trips.get(id);
+  draft = src? JSON.parse(JSON.stringify(src)) : {id, name:'', stops:[{place:'Santiago',from:'',to:'',note:''}]};
+  if(!draft.stops.length) draft.stops.push({place:'',from:'',to:'',note:''});
+  draftFor=id; delArmed=false; dirty=false;
+}
+function renderEditor(){
+  statusBox('#mine-status');
+  const box=$('#editor'); box.replaceChildren();
+  box.append(el('div',{class:'h2row'}, el('h2',{text:t('edTitle')})));
+  if(!S.me || S.dbState==='nodb' || S.dbState==='revoked'){ box.append(el('p',{class:'muted',text:t('edWaiting')})); return; }
+  if(!S.editingId) S.editingId=S.me;
+  if(draftFor!==S.editingId) loadDraft();
+  const isMine = S.editingId===S.me;
+  // owner selector
+  if(S.isOwner){
+    const opts=[el('option',{value:S.me, selected:isMine},t('edMe'))];
+    [...S.trips.values()].filter(x=>x.id!==S.me).sort((a,b)=>(a.name||'').localeCompare(b.name||'')).forEach(x=>opts.push(el('option',{value:x.id,selected:x.id===S.editingId}, x.name||x.id)));
+    if(!S.trips.has(S.editingId) && !isMine) opts.push(el('option',{value:S.editingId,selected:true}, '…'));
+    opts.push(el('option',{value:'__new'},t('edNew')));
+    box.append(el('div',{class:'field'}, el('label',{text:t('edFor')}), el('select',{onchange:e=>{ S.editingId = e.target.value==='__new' ? 'm-'+Math.random().toString(36).slice(2,10) : e.target.value; renderEditor(); }}, opts)));
+  }
+  const nameIn=el('input',{value:draft.name, maxlength:60, placeholder: isMine?'Ana':'Pedro', oninput:e=>{draft.name=e.target.value;}});
+  box.append(el('div',{class:'field'}, el('label',{text: isMine?t('edName'):t('edNameFriend')}), nameIn));
+  box.append(el('h3',{style:'font-size:18px;margin-top:6px',text:t('edStops')}), el('p',{class:'muted small',text:t('edHelp')}));
+  const c=cfg();
+  draft.stops.forEach((s,idx)=>{
+    box.append(el('div',{class:'stop'},
+      el('div',{class:'p'}, el('label',{text:t('edPlace')}), el('input',{list:'places',value:s.place,maxlength:60,placeholder:'Santiago',oninput:e=>{s.place=e.target.value;}})),
+      el('div',null, el('label',{text:t('edFrom')}), el('input',{type:'date',value:s.from,min:'2026-10-01',max:'2027-03-31',onchange:e=>{s.from=e.target.value; if(!s.to||s.to<s.from){ s.to=s.from; renderEditor(); }}})),
+      el('div',null, el('label',{text:t('edTo')}), el('input',{type:'date',value:s.to,min:s.from||'2026-10-01',max:'2027-03-31',onchange:e=>{s.to=e.target.value;}})),
+      el('div',{class:'n'}, el('label',{text:t('edNote')}), el('input',{value:s.note,maxlength:140,oninput:e=>{s.note=e.target.value;}})),
+      el('button',{class:'x',title:'×',onclick:()=>{ dirty=true; draft.stops.splice(idx,1); if(!draft.stops.length) draft.stops.push({place:'',from:'',to:'',note:''}); renderEditor(); }},'×')
+    ));
+  });
+  const msg=el('span',{class:'small',id:'edmsg'});
+  const saveBtn=el('button',{class:'btn primary',onclick:()=>save(saveBtn,msg), disabled:S.readOnly},t('edSave'));
+  box.append(el('div',{class:'row',style:'margin-top:12px'},
+    el('button',{class:'btn',onclick:()=>{ dirty=true; const last=draft.stops[draft.stops.length-1]; draft.stops.push({place:'',from:last&&last.to||'',to:last&&last.to||'',note:''}); renderEditor(); }},t('edAdd')),
+    saveBtn, msg));
+  if(S.trips.has(S.editingId)){
+    const del=el('button',{class:'btn ghost danger small',style:'margin-top:16px',onclick:async()=>{
+      if(!delArmed){ delArmed=true; del.textContent=t('edConfirmDel'); return; }
+      try{ await S.db.doc('trips/'+S.editingId).delete(); S.editingId=S.me; draftFor=undefined; renderEditor(); }catch(e){ msg.textContent=t('edFail'); }
+    }},t('edDelete'));
+    box.append(del);
+  }
+  if(S.readOnly) box.prepend(el('div',{class:'notice err',text:t('edNoWrite')}));
+}
+async function save(btn,msg){
+  msg.className='small'; msg.textContent='';
+  const name=draft.name.trim();
+  if(!name){ msg.textContent=t('edErrName'); return; }
+  const stops=draft.stops.filter(s=>s.place.trim()||s.from||s.to||s.note.trim()).map(s=>({place:s.place.trim(),from:s.from,to:s.to,note:s.note.trim()}));
+  if(stops.some(s=>!s.place||!isDate(s.from)||!isDate(s.to)||s.from>s.to)){ msg.textContent=t('edErrDates'); return; }
+  stops.sort((a,b)=>a.from.localeCompare(b.from));
+  btn.disabled=true;
+  const body={name, stops, updatedAt:new Date().toISOString()};
+  try{
+    await S.db.doc('trips/'+S.editingId).set(body);
+    draft.stops=stops.length?stops:[{place:'',from:'',to:'',note:''}];
+    dirty=false; msg.className='small saved'; msg.textContent=t('edSaved');
+  }catch(e){
+    if(e && (e.code==='invalid_argument'||e.code==='permission-denied')){ S.readOnly=true; renderEditor(); return; }
+    if(e && e.code==='unavailable'){ await new Promise(r=>setTimeout(r,800+Math.random()*800)); try{ await S.db.doc('trips/'+S.editingId).set(body); msg.className='small saved'; msg.textContent=t('edSaved'); btn.disabled=false; return; }catch(e2){} }
+    msg.textContent=t('edFail');
+  }
+  btn.disabled=false;
+}
+
+/* ============ SETTINGS (owner) ============ */
+function renderSettings(){
+  const box=$('#settings');
+  if(!S.isOwner || !S.db){ box.hidden=true; return; }
+  box.hidden=false; box.replaceChildren();
+  const c=cfg(); const v={...c};
+  const inp=(k,type)=> el('input',{type, value:v[k]||'', oninput:e=>{v[k]=e.target.value;}});
+  const msg=el('span',{class:'small'});
+  box.append(el('h3',{style:'font-size:18px;margin-bottom:10px',text:t('stTitle')}),
+    el('div',{class:'grid2'},
+      el('div',{class:'field'}, el('label',{text:t('stWedDate')}), inp('weddingDate','date')),
+      el('div',{class:'field'}, el('label',{text:t('stWedPlace')}), inp('weddingPlace','text')),
+      el('div',{class:'field'}, el('label',{text:t('stStart')}), inp('start','date')),
+      el('div',{class:'field'}, el('label',{text:t('stEnd')}), inp('end','date'))),
+    el('div',{class:'row'}, el('button',{class:'btn primary',onclick:async()=>{
+      try{ await S.db.doc('config/main').set({weddingDate:v.weddingDate||'',weddingPlace:(v.weddingPlace||'').slice(0,80),start:v.start||'',end:v.end||''}); msg.className='small saved'; msg.textContent=t('edSaved'); }
+      catch(e){ msg.className='small'; msg.textContent=t('edFail'); }
+    }},t('stSave')), msg));
+}
+
+/* ============ GUIDE (editable, stored in db) ============ */
+Object.assign(T.es,{
+  gEdit:"Editar guía", gDone:"✓ Listo", gNewSec:"＋ Nueva sección", gAddItem:"＋ Agregar lugar",
+  gEditSec:"Editar sección", gEditItem:"Editar lugar", gNewItem:"Nuevo lugar", gNewSecT:"Nueva sección",
+  fTab:"Pestaña", fEmoji:"Emoji", fTitleEs:"Título (español)", fTitleEn:"Título (inglés)", fIntroEs:"Intro (español)", fIntroEn:"Intro (inglés)",
+  fChipsEs:"“Pide” — platos o tragos, uno por línea (español)", fChipsEn:"“Order” — uno por línea (inglés)",
+  fSection:"Sección", fName:"Nombre", fTagEs:"Etiqueta (es)", fTagEn:"Etiqueta (en)", fAddress:"Dirección o barrio", fMaps:"Link de Google Maps (opcional)",
+  fDescEs:"Descripción (español)", fDescEn:"Descripción (inglés)", fBulEs:"Puntos, uno por línea (español)", fBulEn:"Puntos, uno por línea (inglés)",
+  fTipEs:"Tip (español)", fTipEn:"Tip (inglés)", fPhoto:"Foto", fPhotoAdd:"Subir foto", fPhotoChange:"Cambiar foto", fPhotoRemove:"Quitar foto",
+  fUploading:"Subiendo foto…", fUpErr:"No se pudo subir la foto. Usa JPG o PNG de menos de 20 MB.", fNoAssets:"Subir fotos no está disponible.", gSeed:"Cargar guía inicial de ejemplo", gSeeding:"Cargando…",
+  fSave:"Guardar", fCancel:"Cancelar", fDelete:"Borrar", fDeleteSec:"Borrar sección y sus lugares", fConfirm:"Toca de nuevo para confirmar",
+  fEnHint:"Si dejas el inglés vacío, se muestra el español.", up:"Subir", down:"Bajar",
+  
+  gEmpty:"Todavía no hay nada acá.", gEmptyOwner:"Activa “Editar guía” y crea la primera sección.",
+  gNoDb:"La base de datos no está configurada todavía (ver README).", noSection:"Sin sección"
+});
+Object.assign(T.en,{
+  gEdit:"Edit guide", gDone:"✓ Done", gNewSec:"＋ New section", gAddItem:"＋ Add place",
+  gEditSec:"Edit section", gEditItem:"Edit place", gNewItem:"New place", gNewSecT:"New section",
+  fTab:"Tab", fEmoji:"Emoji", fTitleEs:"Title (Spanish)", fTitleEn:"Title (English)", fIntroEs:"Intro (Spanish)", fIntroEn:"Intro (English)",
+  fChipsEs:"“Pide” — dishes or drinks, one per line (Spanish)", fChipsEn:"“Order” — one per line (English)",
+  fSection:"Section", fName:"Name", fTagEs:"Tag (es)", fTagEn:"Tag (en)", fAddress:"Address or neighborhood", fMaps:"Google Maps link (optional)",
+  fDescEs:"Description (Spanish)", fDescEn:"Description (English)", fBulEs:"Bullet points, one per line (Spanish)", fBulEn:"Bullet points, one per line (English)",
+  fTipEs:"Tip (Spanish)", fTipEn:"Tip (English)", fPhoto:"Photo", fPhotoAdd:"Upload photo", fPhotoChange:"Change photo", fPhotoRemove:"Remove photo",
+  fUploading:"Uploading photo…", fUpErr:"Couldn't upload the photo. Use a JPG or PNG under 20 MB.", fNoAssets:"Photo upload isn't available.", gSeed:"Load starter guide", gSeeding:"Loading…",
+  fSave:"Save", fCancel:"Cancel", fDelete:"Delete", fDeleteSec:"Delete section and its places", fConfirm:"Tap again to confirm",
+  fEnHint:"If you leave English empty, the Spanish text is shown.", up:"Up", down:"Down",
+  gEmpty:"Nothing here yet.", gEmptyOwner:"Turn on “Edit guide” and create the first section.",
+  gNoDb:"The database isn't configured yet (see README).", noSection:"No section"
+});
+const TABNAMES={see:"tabSee",eat:"tabEat",tips:"tabTips"};
+S.sections=new Map(); S.guide=new Map(); S.editMode=false; S.assets=null; S.guideLoaded=false;
+const LL = o => { if(!o||typeof o!=='object') return typeof o==='string'?o:''; const v=o[lang]; if(Array.isArray(v)) return v.length?v:(Array.isArray(o.es)?o.es:[]); return (typeof v==='string'&&v.trim())? v : (typeof o.es==='string'?o.es:''); };
+const LA = o => { const v=LL(o); return Array.isArray(v)?v.filter(x=>typeof x==='string'&&x.trim()):[]; };
+const byOrder=(a,b)=>(+a.order||0)-(+b.order||0);
+const safeUrl = u => (typeof u==='string' && /^https?:\/\//i.test(u.trim())) ? u.trim() : null;
+const PH=new Map();
+function photoSrc(id){
+  if(PH.has(id)) return PH.get(id);
+  const p=S.db.doc('photos/'+id).get().then(sn=>{ const d=sn.exists&&sn.data(); return (d && typeof d.data==='string' && /^data:image\/(jpeg|png|webp);base64,/.test(d.data))? d.data : null; }).catch(()=>{ PH.delete(id); return null; });
+  PH.set(id,p); return p;
+}
+const isAssetId = s => typeof s==='string' && /^[A-Za-z0-9_-]{8,64}$/.test(s);
+const secsOf = tab => [...S.sections.values()].filter(s=>s.tab===tab).sort(byOrder);
+const itemsOf = sid => [...S.guide.values()].filter(i=>i.section===sid).sort(byOrder);
+
+function photoEl(id, cls){
+  if(!isAssetId(id)) return null;
+  const img=el('img',{class:cls||'ph',alt:''});
+  photoSrc(id).then(src=>{ if(src) img.src=src; else img.remove(); });
+  img.addEventListener('click',()=>{ if(img.src) openLightbox(img.src); });
+  return img;
+}
+function openLightbox(src){
+  const ov=el('div',{class:'lb',onclick:()=>ov.remove()}, el('img',{src,alt:''}));
+  document.body.append(ov);
+}
+
+function renderSee(){ renderGuide('see'); }
+function renderEat(){ renderGuide('eat'); }
+function renderTips(){ renderGuide('tips'); }
+
+function renderGuide(tab){
+  const box=$('#'+tab); if(!box) return;
+  if(box.contains(document.activeElement) && document.activeElement.tagName==='INPUT') return;
+  const out=[];
+  if(S.isOwner && S.db){
+    out.push(el('div',{class:'edbar'},
+      el('button',{class:'btn'+(S.editMode?' primary':''),onclick:()=>{ S.editMode=!S.editMode; renderGuide('see');renderGuide('eat');renderGuide('tips'); }}, S.editMode?t('gDone'):t('gEdit')),
+      S.editMode? el('button',{class:'btn',onclick:()=>openSectionForm(null,tab)},t('gNewSec')):null));
+  }
+  if(S.dbState==='nodb'){ box.replaceChildren(el('div',{class:'notice',text:t('gNoDb')})); return; }
+  if(S.dbState==='revoked'){ box.replaceChildren(el('div',{class:'notice err',text:t('revoked')})); return; }
+  const secs=secsOf(tab);
+  if(!S.guideLoaded && !secs.length){ box.replaceChildren(...out, el('div',{class:'notice',text:t(S.dbState==='slow'?'slow':'loading')})); return; }
+  if(tab==='eat' && secs.length>1){
+    out.push(el('div',{class:'catnav'}, secs.map(s=> el('a',{class:'chip',href:'#eat',onclick:e=>{ e.preventDefault(); const tgt=document.getElementById('sec-'+s.id); if(tgt) tgt.scrollIntoView({behavior:'smooth'}); }}, (s.emoji||'')+' '+LL(s.title).split(' (')[0]))));
+  }
+  if(tab==='eat') out.push(el('p',{class:'muted',text:t('eatIntro')}));
+  secs.forEach((s,si)=>{
+    const items=itemsOf(s.id);
+    out.push(el('div',{class:'sec',id:'sec-'+s.id}, el('span',{class:'emoji',text:s.emoji||''}), el('h2',{text:LL(s.title)||'—'}),
+      S.editMode? el('span',{class:'ctl'},
+        el('button',{title:t('up'),disabled:si===0,onclick:()=>swapOrder(secs[si-1],s,'sections')},'↑'),
+        el('button',{title:t('down'),disabled:si===secs.length-1,onclick:()=>swapOrder(s,secs[si+1],'sections')},'↓'),
+        el('button',{onclick:()=>openSectionForm(s)},'✎')):null));
+    if(LL(s.intro)) out.push(el('p',{class:'muted',style:'margin-top:-4px',text:LL(s.intro)}));
+    const chips=LA(s.chips);
+    if(chips.length) out.push(el('div',{class:'card',style:'margin-bottom:12px'}, el('b',{text:t('dishes')+':'}), el('div',{class:'dish'}, chips.map(d=>el('span',{text:d})))));
+    const cards=items.map((it,ii)=>itemCard(it, items, ii, tab));
+    if(S.editMode) cards.push(el('button',{class:'g addcard',onclick:()=>openItemForm(null,s.id)},t('gAddItem')));
+    if(cards.length) out.push(el('div',{class:'cards'+(tab==='tips'?' tight':'')}, cards));
+  });
+  // orphans
+  if(S.editMode){
+    const known=new Set(S.sections.keys());
+    const orph=[...S.guide.values()].filter(i=>!known.has(i.section) && (tab==='see')).sort(byOrder);
+    if(orph.length){ out.push(el('div',{class:'sec'},el('h2',{text:t('noSection')}))); out.push(el('div',{class:'cards'}, orph.map((it,ii)=>itemCard(it,orph,ii,tab)))); }
+  }
+  if(!secs.length){
+    const seedBtn = (S.guideLoaded && S.sections.size===0)? el('button',{class:'btn primary',style:'margin-top:12px',onclick:async()=>{ seedBtn.disabled=true; seedBtn.textContent=t('gSeeding'); try{ const r=await fetch('seed.json'); const ops=await r.json(); for(const o of ops){ await S.db.doc(o.path).set(o.data); } }catch(e){ seedBtn.textContent=t('edFail'); } }},t('gSeed')) : null;
+    out.push(el('div',{class:'empty muted'}, t('gEmpty'), el('div',{class:'small',text:t('gEmptyOwner')}), seedBtn));
+  }
+  if(tab!=='tips' && secs.length) out.push(el('p',{class:'disclaimer',text:t('disclaimer')}));
+  box.replaceChildren(...out);
+}
+const PIN=()=>{ const sp=el('span',{'aria-hidden':'true',style:'display:inline-flex'}); sp.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>'; return sp; };
+function itemCard(it, list, ii, tab){
+  const maps=safeUrl(it.maps);
+  const bul=LA(it.bullets), tag=LL(it.tag), tip=LL(it.tip), desc=LL(it.desc);
+  const isTipEmoji = tab==='tips' && it.name && [...it.name].length<=2;
+  return el('div',{class:'g'+(it.photo?' hasph':'')},
+    photoEl(it.photo),
+    el('div',{class:'gb'},
+      tag? el('span',{class:'tag',text:tag}):null,
+      it.name? el('h3',{style:isTipEmoji?'font-size:26px':'',text:it.name}):null,
+      it.address? (maps? el('a',{class:'small addr',href:maps,target:'_blank',rel:'noopener'},PIN(),it.address) : el('span',{class:'small muted addr'},PIN(),it.address)) : (maps? el('a',{class:'small addr',href:maps,target:'_blank',rel:'noopener'},PIN(),'Google Maps'):null),
+      desc? el('span',{text:desc}):null,
+      bul.length? el('ul',null, bul.map(x=>el('li',{text:x}))):null,
+      tip? el('div',{class:'tip',text:'💡 '+tip}):null,
+      S.editMode? el('div',{class:'ctl ictl'},
+        el('button',{disabled:ii===0,onclick:()=>swapOrder(list[ii-1],it,'guide')},'←'),
+        el('button',{disabled:ii===list.length-1,onclick:()=>swapOrder(it,list[ii+1],'guide')},'→'),
+        el('button',{onclick:()=>openItemForm(it)},'✎')):null
+    ));
+}
+async function swapOrder(a,b,coll){
+  if(!a||!b) return;
+  let oa=+a.order||0, ob=+b.order||0; if(oa===ob){ ob=oa+1; }
+  try{ await S.db.doc(coll+'/'+a.id).update({order:ob}); await S.db.doc(coll+'/'+b.id).update({order:oa}); }catch(e){ console.warn(e); }
+}
+
+/* ---- modal forms ---- */
+function modal(title, body, onSave, extra){
+  const msg=el('span',{class:'small'});
+  const save=el('button',{class:'btn primary'},t('fSave'));
+  const ov=el('div',{class:'mo'});
+  const close=()=>ov.remove();
+  save.addEventListener('click',async()=>{ save.disabled=true; msg.textContent=''; try{ const ok=await onSave(msg); if(ok!==false) close(); }catch(e){ msg.textContent=t('edFail'); } save.disabled=false; });
+  ov.append(el('div',{class:'mbox'}, el('h3',{text:title}), body, el('div',{class:'row',style:'margin-top:14px'}, save, el('button',{class:'btn',onclick:close},t('fCancel')), msg, el('span',{style:'flex:1'}), extra||null)));
+  ov.addEventListener('click',e=>{ if(e.target===ov) close(); });
+  document.body.append(ov);
+  return {close,msg};
+}
+const fld=(label,input)=>el('div',{class:'field'},el('label',{text:label}),input);
+const tin=(v,ph)=>el('input',{value:v||'',placeholder:ph||''});
+const tta=(v,rows)=>el('textarea',{rows:rows||3},v||'');
+const lines=s=>s.split('\n').map(x=>x.trim()).filter(Boolean);
+function armDelete(btn, fn){ let armed=false; btn.addEventListener('click',async()=>{ if(!armed){ armed=true; btn.textContent=t('fConfirm'); return; } btn.disabled=true; await fn(); }); return btn; }
+
+function openSectionForm(s, tab){
+  const isNew=!s; s=s||{tab, emoji:'', title:{es:'',en:''}, intro:{es:'',en:''}, chips:{es:[],en:[]}};
+  const f={ tab:el('select',null, ['see','eat','tips'].map(k=>el('option',{value:k,selected:s.tab===k},t(TABNAMES[k])))),
+    emoji:tin(s.emoji,'🦐'), tEs:tin(s.title&&s.title.es), tEn:tin(s.title&&s.title.en), iEs:tta(s.intro&&s.intro.es,2), iEn:tta(s.intro&&s.intro.en,2),
+    cEs:tta((s.chips&&s.chips.es||[]).join('\n'),4), cEn:tta((s.chips&&s.chips.en||[]).join('\n'),4) };
+  const body=el('div',null, el('p',{class:'small muted',text:t('fEnHint')}),
+    el('div',{class:'grid2'}, fld(t('fTab'),f.tab), fld(t('fEmoji'),f.emoji), fld(t('fTitleEs'),f.tEs), fld(t('fTitleEn'),f.tEn), fld(t('fIntroEs'),f.iEs), fld(t('fIntroEn'),f.iEn), fld(t('fChipsEs'),f.cEs), fld(t('fChipsEn'),f.cEn)));
+  const del = isNew? null : armDelete(el('button',{class:'btn ghost danger small'},t('fDeleteSec')), async()=>{
+    for(const it of itemsOf(s.id)){ await deleteItem(it); }
+    await S.db.doc('sections/'+s.id).delete(); m.close();
+  });
+  const m=modal(isNew?t('gNewSecT'):t('gEditSec'), body, async(msg)=>{
+    if(!f.tEs.value.trim()){ msg.textContent=t('edErrName'); return false; }
+    const data={tab:f.tab.value, emoji:f.emoji.value.trim().slice(0,8), title:{es:f.tEs.value.trim(),en:f.tEn.value.trim()}, intro:{es:f.iEs.value.trim(),en:f.iEn.value.trim()}, chips:{es:lines(f.cEs.value),en:lines(f.cEn.value)},
+      order: isNew? (Math.max(0,...[...S.sections.values()].map(x=>+x.order||0))+10) : (+s.order||0)};
+    const ref = isNew? S.db.collection('sections').doc() : S.db.doc('sections/'+s.id);
+    await ref.set(data);
+  }, del);
+}
+
+async function shrink(file){
+  try{
+    const bmp=await createImageBitmap(file);
+    for(const [max,q] of [[1280,0.78],[1000,0.68],[800,0.6]]){
+      const sc=Math.min(1,max/Math.max(bmp.width,bmp.height));
+      const c=document.createElement('canvas'); c.width=Math.round(bmp.width*sc); c.height=Math.round(bmp.height*sc);
+      c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+      const b=await new Promise(r=>c.toBlob(r,'image/jpeg',q));
+      if(b && b.size<600000) return b;
+    }
+  }catch(e){}
+  return file;
+}
+async function deleteItem(it){
+  await S.db.doc('guide/'+it.id).delete();
+  if(isAssetId(it.photo) && S.assets){ try{ await S.assets.delete(it.photo); }catch(e){} }
+}
+function openItemForm(it, sectionId){
+  const isNew=!it; it=it||{section:sectionId, name:'', tag:{es:'',en:''}, address:'', maps:'', desc:{es:'',en:''}, bullets:{es:[],en:[]}, tip:{es:'',en:''}, photo:''};
+  let photo=it.photo||''; const oldPhoto=photo; const uploaded=[];
+  const allSecs=[...S.sections.values()].sort((a,b)=>(a.tab+'').localeCompare(b.tab+'')||byOrder(a,b));
+  const f={ sec:el('select',null, allSecs.map(s=>el('option',{value:s.id,selected:s.id===it.section},t(TABNAMES[s.tab])+' › '+(s.emoji||'')+' '+LL(s.title)))),
+    name:tin(it.name), tEs:tin(it.tag&&it.tag.es), tEn:tin(it.tag&&it.tag.en), addr:tin(it.address), maps:tin(it.maps,'https://maps.app.goo.gl/…'),
+    dEs:tta(it.desc&&it.desc.es,3), dEn:tta(it.desc&&it.desc.en,3), bEs:tta((it.bullets&&it.bullets.es||[]).join('\n'),3), bEn:tta((it.bullets&&it.bullets.en||[]).join('\n'),3),
+    tipEs:tin(it.tip&&it.tip.es), tipEn:tin(it.tip&&it.tip.en) };
+  const phBox=el('div',{class:'phbox'}); const phMsg=el('span',{class:'small muted'});
+  const file=el('input',{type:'file',accept:'image/*',style:'display:none'});
+  const drawPhoto=()=>{ phBox.replaceChildren(...[
+      photo? photoEl(photo,'prev'):null,
+      S.assets? el('div',{class:'row'},
+        el('button',{class:'btn',onclick:()=>file.click()}, photo?t('fPhotoChange'):t('fPhotoAdd')),
+        photo? el('button',{class:'btn ghost danger',onclick:()=>{ photo=''; drawPhoto(); }},t('fPhotoRemove')):null, phMsg)
+      : el('span',{class:'small muted',text:t('fNoAssets')})].filter(Boolean)); };
+  file.addEventListener('change',async()=>{
+    const fl=file.files&&file.files[0]; if(!fl) return;
+    phMsg.textContent=t('fUploading');
+    try{ const blob=await shrink(fl); const type=(blob.type&&/^image\/(jpeg|png|webp|gif)$/.test(blob.type))?blob.type:undefined;
+      const r=await S.assets.upload(blob, type?{type}:undefined); photo=r.id; uploaded.push(r.id); phMsg.textContent=''; drawPhoto(); }
+    catch(e){ phMsg.textContent=t('fUpErr'); }
+    file.value='';
+  });
+  drawPhoto();
+  const body=el('div',null, el('p',{class:'small muted',text:t('fEnHint')}),
+    fld(t('fPhoto'),el('div',null,phBox,file)),
+    el('div',{class:'grid2'}, fld(t('fSection'),f.sec), fld(t('fName'),f.name), fld(t('fAddress'),f.addr), fld(t('fMaps'),f.maps),
+      fld(t('fDescEs'),f.dEs), fld(t('fDescEn'),f.dEn), fld(t('fBulEs'),f.bEs), fld(t('fBulEn'),f.bEn), fld(t('fTagEs'),f.tEs), fld(t('fTagEn'),f.tEn), fld(t('fTipEs'),f.tipEs), fld(t('fTipEn'),f.tipEn)));
+  const del = isNew? null : armDelete(el('button',{class:'btn ghost danger small'},t('fDelete')), async()=>{ await deleteItem(it); m.close(); });
+  const m=modal(isNew?t('gNewItem'):t('gEditItem'), body, async(msg)=>{
+    if(!f.name.value.trim()){ msg.textContent=t('edErrName'); return false; }
+    const sid=f.sec.value;
+    const data={section:sid, name:f.name.value.trim().slice(0,80), tag:{es:f.tEs.value.trim(),en:f.tEn.value.trim()}, address:f.addr.value.trim().slice(0,120), maps:(safeUrl(f.maps.value)||''),
+      desc:{es:f.dEs.value.trim(),en:f.dEn.value.trim()}, bullets:{es:lines(f.bEs.value),en:lines(f.bEn.value)}, tip:{es:f.tipEs.value.trim(),en:f.tipEn.value.trim()}, photo:photo||'',
+      order: (isNew || sid!==it.section)? (Math.max(0,...itemsOf(sid).map(x=>+x.order||0))+10) : (+it.order||0)};
+    const ref = isNew? S.db.collection('guide').doc() : S.db.doc('guide/'+it.id);
+    await ref.set(data);
+    // clean up photos no longer used
+    if(S.assets){ for(const id of [oldPhoto,...uploaded]){ if(id && id!==photo && isAssetId(id)){ try{ await S.assets.delete(id); }catch(e){} } } }
+  }, del);
+}
+
+/* ============ DATA ============ */
+/* ============ FIREBASE ============ */
+// 👉 Pega aquí la configuración de tu proyecto Firebase (Consola → Configuración del proyecto → Tus apps → Web).
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCFhGoRa9zx7aDgTPQ51fXQfT3AEVro6fs",
+  authDomain: "viajechile.firebaseapp.com",
+  projectId: "viajechile",
+  storageBucket: "viajechile.firebasestorage.app",
+  messagingSenderId: "108803382653",
+  appId: "1:108803382653:web:bbb2bc098d3d370f184014",
+  measurementId: "G-PNN3RWND8H"
+};
+
+const FB_VER='10.12.2';
+async function makeDb(){
+  const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`);
+  const F = await import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-firestore.js`);
+  const fdb = F.getFirestore(initializeApp(FIREBASE_CONFIG));
+  const wrap = d => ({ id:d.id, exists:d.exists(), data:()=>d.data(), metadata:{fromCache:d.metadata.fromCache, hasPendingWrites:d.metadata.hasPendingWrites} });
+  const docRef = path => { const r=F.doc(fdb,path); return {
+    id:r.id, path,
+    get: async()=>wrap(await F.getDoc(r)),
+    set: d=>F.setDoc(r,d), update: d=>F.updateDoc(r,d), delete: ()=>F.deleteDoc(r),
+    onSnapshot: (n,e)=>F.onSnapshot(r, s=>n(wrap(s)), e)
+  }; };
+  const colRef = path => ({
+    path,
+    doc: id => docRef(path+'/'+(id || F.doc(F.collection(fdb,path)).id)),
+    onSnapshot: (n,e)=>F.onSnapshot(F.collection(fdb,path), s=>n({docs:s.docs.map(wrap), size:s.size, empty:s.empty, metadata:{fromCache:s.metadata.fromCache}}), e)
+  });
+  const db = { doc:docRef, collection:colRef };
+  const toDataURL = blob => new Promise((res,rej)=>{ const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=rej; fr.readAsDataURL(blob); });
+  const assets = {
+    upload: async (blob)=>{ const data=await toDataURL(blob); if(data.length>950000) throw {code:'too_large'}; const ref=colRef('photos').doc(); await ref.set({data, createdAt:Date.now()}); PH.set(ref.id, Promise.resolve(data)); return {id:ref.id}; },
+    delete: async (id)=>{ if(isAssetId(id)) await docRef('photos/'+id).delete(); PH.delete(id); return {deleted:true}; }
+  };
+  return {db, assets};
+}
+function myId(){
+  let id=null; try{ id=localStorage.getItem('meId'); }catch(e){}
+  if(!id){ id='p-'+Math.random().toString(36).slice(2,12); try{ localStorage.setItem('meId',id); }catch(e){} }
+  return id;
+}
+async function initData(){
+  if(!FIREBASE_CONFIG.apiKey || FIREBASE_CONFIG.apiKey.startsWith('PEGA')){ S.dbState='nodb'; renderAll(); return; }
+  let slowTimer = setTimeout(()=>{ if(S.dbState==='loading'){ S.dbState='slow'; renderWho(); renderEditor(); renderGuide('see'); renderGuide('eat'); renderGuide('tips'); } }, 10000);
+  let db, assets;
+  try{ ({db,assets} = await makeDb()); }catch(e){ console.error(e); clearTimeout(slowTimer); S.dbState='nodb'; renderAll(); return; }
+  S.db=db; S.assets=assets; S.isOwner=true; S.me=myId();
+  renderEditor(); renderSettings();
+  let gotTrips=false;
+  db.collection('trips').onSnapshot(snap=>{
+    S.trips = new Map(snap.docs.filter(d=>d.exists).map(d=>[d.id, cleanTrip(d.id, d.data()||{})]));
+    if(!snap.metadata.fromCache){ gotTrips=true; clearTimeout(slowTimer); }
+    if(gotTrips || S.trips.size) S.dbState='ready';
+    renderWho(); if(!dirty) draftFor=undefined; renderEditorIfIdle();
+  }, err=>{ console.error(err); clearTimeout(slowTimer); S.dbState='ready'; renderWho(); renderEditor(); });
+  let gotSec=false, gotGuide=false;
+  const guideDone=()=>{ if(gotSec&&gotGuide){ S.guideLoaded=true; } renderGuide('see'); renderGuide('eat'); renderGuide('tips'); };
+  db.collection('sections').onSnapshot(snap=>{ S.sections=new Map(snap.docs.filter(d=>d.exists).map(d=>[d.id,Object.assign({},d.data()||{},{id:d.id})])); if(!snap.metadata.fromCache) gotSec=true; guideDone(); }, ()=>{ gotSec=true; guideDone(); });
+  db.collection('guide').onSnapshot(snap=>{ S.guide=new Map(snap.docs.filter(d=>d.exists).map(d=>[d.id,Object.assign({},d.data()||{},{id:d.id})])); if(!snap.metadata.fromCache) gotGuide=true; guideDone(); }, ()=>{ gotGuide=true; guideDone(); });
+  db.doc('config/main').onSnapshot(snap=>{ S.config = snap.exists ? (snap.data()||{}) : {}; renderCountdown(); renderWho(); renderSettingsIfIdle(); }, ()=>{});
+}
+// avoid clobbering what someone is typing
+function isTypingIn(id){ const a=document.activeElement; return a && $(id).contains(a); }
+function renderEditorIfIdle(){ if(!isTypingIn('#editor')) renderEditor(); }
+function renderSettingsIfIdle(){ if(!isTypingIn('#settings')) renderSettings(); }
+
+/* ============ boot ============ */
+renderAll();
+showTab(location.hash.slice(1)||'who');
+initData();
+</script>
+</body>
+</html>
