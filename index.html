@@ -147,6 +147,18 @@ tr.me .name{color:var(--red-d)}
 .catnav a{text-decoration:none;color:var(--ink)}
 .card .dish,.dish{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 2px}
 .dish span{background:var(--red-bg);color:var(--red-ink);border-radius:12px;padding:8px 12px;font-size:14px;font-weight:700}
+.subh{font-family:"Instrument Sans",system-ui,sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:18px 0 10px}
+.dishes{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.dc{background:#fff;border-radius:16px;box-shadow:var(--shadow);display:flex;gap:12px;padding:10px;align-items:flex-start;min-height:96px}
+.dc .dph{width:84px;height:84px;flex-shrink:0;border-radius:12px;object-fit:cover;cursor:zoom-in;background:#F7DCC8}
+.dc .dph.none{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:30px;color:var(--red-ink);background:var(--red-bg);cursor:default}
+.dc .db{display:flex;flex-direction:column;gap:3px;min-width:0;padding-top:2px}
+.dc .db b{font-size:16px}
+.dc .db span{font-size:14px;color:var(--ink2);line-height:1.4}
+.dc .dtip{font-size:13px !important;color:#5C4300 !important;background:var(--sun-bg);border-radius:8px;padding:3px 8px;align-self:flex-start;margin-top:2px}
+.dc.addcard{justify-content:center;align-items:center;border:2px dashed var(--line2);background:transparent;box-shadow:none;color:var(--muted);font-weight:700}
+.search{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line2);border-radius:14px;padding:0 14px;margin-bottom:18px;color:var(--muted);box-shadow:var(--shadow)}
+.search input{flex:1;border:0;outline:0;background:transparent;min-height:50px;font-size:16px;color:var(--ink)}
 .disclaimer{font-size:13px;color:var(--muted);margin-top:28px}
 footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28px}
 
@@ -239,7 +251,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28p
   </section>
 
   <section class="view" id="v-see"><div id="see"></div></section>
-  <section class="view" id="v-eat"><div id="eat"></div></section>
+  <section class="view" id="v-eat"><div class="search"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="eatq" type="search" autocomplete="off" data-ph="search"></div><div id="eat"></div></section>
   <section class="view" id="v-tips"><div id="tips"></div></section>
 </main>
 <footer data-i="footer"></footer>
@@ -365,6 +377,7 @@ const cleanTrip = (id, d) => ({ id, name: typeof d.name==='string'?d.name.slice(
 function applyI18n(){
   document.documentElement.lang = lang;
   document.querySelectorAll('[data-i]').forEach(n=> n.textContent = t(n.dataset.i));
+  document.querySelectorAll('[data-ph]').forEach(n=> n.placeholder = t(n.dataset.ph));
   document.querySelectorAll('.lang button').forEach(b=> b.classList.toggle('on', b.dataset.lang===lang));
   const dl=$('#places'); dl.replaceChildren(...KNOWN.map(([p])=>el('option',{value:p})));
 }
@@ -392,6 +405,7 @@ function showTab(id){
 }
 $('#tabs').addEventListener('click',e=>{ const b=e.target.closest('button[data-tab]'); if(!b) return; location.hash=b.dataset.tab; showTab(b.dataset.tab); });
 window.addEventListener('hashchange',()=>showTab(location.hash.slice(1)));
+S.eatQ=''; $('#eatq').addEventListener('input',e=>{ S.eatQ=e.target.value; renderGuide('eat'); });
 $('#addMine').addEventListener('click',()=>{ S.editingId=S.me; location.hash='mine'; showTab('mine'); window.scrollTo({top:0,behavior:'smooth'}); });
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ lang=b.dataset.lang; try{localStorage.setItem('lang',lang)}catch(e){} renderAll(); }));
 
@@ -579,7 +593,7 @@ Object.assign(T.es,{
   fSection:"Sección", fName:"Nombre", fTagEs:"Etiqueta (es)", fTagEn:"Etiqueta (en)", fAddress:"Dirección o barrio", fMaps:"Link de Google Maps (opcional)",
   fDescEs:"Descripción (español)", fDescEn:"Descripción (inglés)", fBulEs:"Puntos, uno por línea (español)", fBulEn:"Puntos, uno por línea (inglés)",
   fTipEs:"Tip (español)", fTipEn:"Tip (inglés)", fPhoto:"Foto", fPhotoAdd:"Subir foto", fPhotoChange:"Cambiar foto", fPhotoRemove:"Quitar foto",
-  fUploading:"Subiendo foto…", fUpErr:"No se pudo subir la foto. Usa JPG o PNG de menos de 20 MB.", fNoAssets:"Subir fotos no está disponible.", gSeed:"Cargar guía inicial de ejemplo", gSeeding:"Cargando…",
+  fUploading:"Subiendo foto…", fUpErr:"No se pudo subir la foto. Usa JPG o PNG de menos de 20 MB.", fNoAssets:"Subir fotos no está disponible.", gDishes:"Qué pedir", gSeedDishes:"Agregar platos de ejemplo", gPlaces:"Dónde ir", gAddDish:"＋ Agregar plato o trago", fKind:"Tipo", kPlace:"Lugar / restaurante", kDish:"Plato o trago", fDishName:"Nombre (como sale en la carta)", fDishDescEs:"Qué es (español)", fDishDescEn:"Qué es (inglés)", search:"Buscar un plato, trago o lugar…", searchNone:"Nada con ese nombre en la guía todavía.", gNewDish:"Nuevo plato o trago", gSeed:"Cargar guía inicial de ejemplo", gSeeding:"Cargando…",
   fSave:"Guardar", fCancel:"Cancelar", fDelete:"Borrar", fDeleteSec:"Borrar sección y sus lugares", fConfirm:"Toca de nuevo para confirmar",
   fEnHint:"Si dejas el inglés vacío, se muestra el español.", up:"Subir", down:"Bajar",
   
@@ -594,7 +608,7 @@ Object.assign(T.en,{
   fSection:"Section", fName:"Name", fTagEs:"Tag (es)", fTagEn:"Tag (en)", fAddress:"Address or neighborhood", fMaps:"Google Maps link (optional)",
   fDescEs:"Description (Spanish)", fDescEn:"Description (English)", fBulEs:"Bullet points, one per line (Spanish)", fBulEn:"Bullet points, one per line (English)",
   fTipEs:"Tip (Spanish)", fTipEn:"Tip (English)", fPhoto:"Photo", fPhotoAdd:"Upload photo", fPhotoChange:"Change photo", fPhotoRemove:"Remove photo",
-  fUploading:"Uploading photo…", fUpErr:"Couldn't upload the photo. Use a JPG or PNG under 20 MB.", fNoAssets:"Photo upload isn't available.", gSeed:"Load starter guide", gSeeding:"Loading…",
+  fUploading:"Uploading photo…", fUpErr:"Couldn't upload the photo. Use a JPG or PNG under 20 MB.", fNoAssets:"Photo upload isn't available.", gDishes:"What to order", gSeedDishes:"Add sample dishes", gPlaces:"Where to go", gAddDish:"＋ Add dish or drink", fKind:"Type", kPlace:"Place / restaurant", kDish:"Dish or drink", fDishName:"Name (as on the menu)", fDishDescEs:"What it is (Spanish)", fDishDescEn:"What it is (English)", search:"Search a dish, drink or place…", searchNone:"Nothing with that name in the guide yet.", gNewDish:"New dish or drink", gSeed:"Load starter guide", gSeeding:"Loading…",
   fSave:"Save", fCancel:"Cancel", fDelete:"Delete", fDeleteSec:"Delete section and its places", fConfirm:"Tap again to confirm",
   fEnHint:"If you leave English empty, the Spanish text is shown.", up:"Up", down:"Down",
   gEmpty:"Nothing here yet.", gEmptyOwner:"Turn on “Edit guide” and create the first section.",
@@ -639,7 +653,8 @@ function renderGuide(tab){
   if(S.isOwner && S.db){
     out.push(el('div',{class:'edbar'},
       el('button',{class:'btn'+(S.editMode?' primary':''),onclick:()=>{ S.editMode=!S.editMode; renderGuide('see');renderGuide('eat');renderGuide('tips'); }}, S.editMode?t('gDone'):t('gEdit')),
-      S.editMode? el('button',{class:'btn',onclick:()=>openSectionForm(null,tab)},t('gNewSec')):null));
+      S.editMode? el('button',{class:'btn',onclick:()=>openSectionForm(null,tab)},t('gNewSec')):null,
+      (S.editMode && tab==='eat' && ![...S.guide.values()].some(i=>i.kind==='dish'))? (()=>{ const b=el('button',{class:'btn',onclick:async()=>{ b.disabled=true; b.textContent=t('gSeeding'); try{ const ops=await (await fetch('seed.json')).json(); for(const o of ops){ if(o.path.startsWith('guide/dish-') && S.sections.has(o.data.section)) await S.db.doc(o.path).set(o.data); } }catch(e){ b.textContent=t('edFail'); } }},t('gSeedDishes')); return b; })() : null));
   }
   if(S.dbState==='nodb'){ box.replaceChildren(el('div',{class:'notice',text:t('gNoDb')})); return; }
   if(S.dbState==='revoked'){ box.replaceChildren(el('div',{class:'notice err',text:t('revoked')})); return; }
@@ -650,7 +665,11 @@ function renderGuide(tab){
   }
   if(tab==='eat') out.push(el('p',{class:'muted',text:t('eatIntro')}));
   secs.forEach((s,si)=>{
-    const items=itemsOf(s.id);
+    const q = tab==='eat' ? norm(S.eatQ||'') : '';
+    const match = it => !q || norm([it.name, LL(it.desc), it.address, LL(it.tag)].join(' ')).includes(q);
+    const all=itemsOf(s.id);
+    const dishes=all.filter(i=>i.kind==='dish' && match(i)), items=all.filter(i=>i.kind!=='dish' && match(i));
+    if(q && !dishes.length && !items.length) return;
     out.push(el('div',{class:'sec',id:'sec-'+s.id}, el('span',{class:'emoji',text:s.emoji||''}), el('h2',{text:LL(s.title)||'—'}),
       S.editMode? el('span',{class:'ctl'},
         el('button',{title:t('up'),disabled:si===0,onclick:()=>swapOrder(secs[si-1],s,'sections')},'↑'),
@@ -658,10 +677,16 @@ function renderGuide(tab){
         el('button',{onclick:()=>openSectionForm(s)},'✎')):null));
     if(LL(s.intro)) out.push(el('p',{class:'muted',style:'margin-top:-4px',text:LL(s.intro)}));
     const chips=LA(s.chips);
-    if(chips.length) out.push(el('div',{class:'card',style:'margin-bottom:12px'}, el('b',{text:t('dishes')+':'}), el('div',{class:'dish'}, chips.map(d=>el('span',{text:d})))));
+    const hasDishes = all.some(i=>i.kind==='dish') || (S.editMode && tab==='eat');
+    if(chips.length && !all.some(i=>i.kind==='dish') && !q) out.push(el('div',{class:'card',style:'margin-bottom:12px'}, el('b',{text:t('dishes')+':'}), el('div',{class:'dish'}, chips.map(d=>el('span',{text:d})))));
+    if(hasDishes){
+      const dc=dishes.map((it,ii)=>dishCard(it, dishes, ii));
+      if(S.editMode) dc.push(el('button',{class:'dc addcard',onclick:()=>openItemForm(null,s.id,'dish')},t('gAddDish')));
+      if(dc.length){ out.push(el('h3',{class:'subh',text:t('gDishes')})); out.push(el('div',{class:'dishes'}, dc)); }
+    }
     const cards=items.map((it,ii)=>itemCard(it, items, ii, tab));
-    if(S.editMode) cards.push(el('button',{class:'g addcard',onclick:()=>openItemForm(null,s.id)},t('gAddItem')));
-    if(cards.length) out.push(el('div',{class:'cards'+(tab==='tips'?' tight':'')}, cards));
+    if(S.editMode) cards.push(el('button',{class:'g addcard',onclick:()=>openItemForm(null,s.id,'place')},t('gAddItem')));
+    if(cards.length){ if(hasDishes) out.push(el('h3',{class:'subh',text:t('gPlaces')})); out.push(el('div',{class:'cards'+(tab==='tips'?' tight':'')}, cards)); }
   });
   // orphans
   if(S.editMode){
@@ -669,6 +694,7 @@ function renderGuide(tab){
     const orph=[...S.guide.values()].filter(i=>!known.has(i.section) && (tab==='see')).sort(byOrder);
     if(orph.length){ out.push(el('div',{class:'sec'},el('h2',{text:t('noSection')}))); out.push(el('div',{class:'cards'}, orph.map((it,ii)=>itemCard(it,orph,ii,tab)))); }
   }
+  if(tab==='eat' && S.eatQ && secs.length && !out.some(n=>n.classList&&n.classList.contains('sec'))) out.push(el('div',{class:'empty muted',text:t('searchNone')}));
   if(!secs.length){
     const seedBtn = (S.guideLoaded && S.sections.size===0)? el('button',{class:'btn primary',style:'margin-top:12px',onclick:async()=>{ seedBtn.disabled=true; seedBtn.textContent=t('gSeeding'); try{ const r=await fetch('seed.json'); const ops=await r.json(); for(const o of ops){ await S.db.doc(o.path).set(o.data); } }catch(e){ seedBtn.textContent=t('edFail'); } }},t('gSeed')) : null;
     out.push(el('div',{class:'empty muted'}, t('gEmpty'), el('div',{class:'small',text:t('gEmptyOwner')}), seedBtn));
@@ -677,6 +703,19 @@ function renderGuide(tab){
   box.replaceChildren(...out);
 }
 const PIN=()=>{ const sp=el('span',{'aria-hidden':'true',style:'display:inline-flex'}); sp.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>'; return sp; };
+function dishCard(it, list, ii){
+  const desc=LL(it.desc), tip=LL(it.tip);
+  return el('div',{class:'dc'+(it.photo?' hasph':'')},
+    isAssetId(it.photo)? photoEl(it.photo,'dph') : el('div',{class:'dph none','aria-hidden':'true'}, (it.name||'?').trim().charAt(0).toUpperCase()),
+    el('div',{class:'db'},
+      el('b',{text:it.name}),
+      desc? el('span',{text:desc}):null,
+      tip? el('span',{class:'dtip',text:tip}):null,
+      S.editMode? el('div',{class:'ctl ictl'},
+        el('button',{disabled:ii===0,onclick:()=>swapOrder(list[ii-1],it,'guide')},'←'),
+        el('button',{disabled:ii===list.length-1,onclick:()=>swapOrder(it,list[ii+1],'guide')},'→'),
+        el('button',{onclick:()=>openItemForm(it)},'✎')):null));
+}
 function itemCard(it, list, ii, tab){
   const maps=safeUrl(it.maps);
   const bul=LA(it.bullets), tag=LL(it.tag), tip=LL(it.tip), desc=LL(it.desc);
@@ -757,11 +796,12 @@ async function deleteItem(it){
   await S.db.doc('guide/'+it.id).delete();
   if(isAssetId(it.photo) && S.assets){ try{ await S.assets.delete(it.photo); }catch(e){} }
 }
-function openItemForm(it, sectionId){
-  const isNew=!it; it=it||{section:sectionId, name:'', tag:{es:'',en:''}, address:'', maps:'', desc:{es:'',en:''}, bullets:{es:[],en:[]}, tip:{es:'',en:''}, photo:''};
+function openItemForm(it, sectionId, kind){
+  const isNew=!it; it=it||{kind:kind||'place', section:sectionId, name:'', tag:{es:'',en:''}, address:'', maps:'', desc:{es:'',en:''}, bullets:{es:[],en:[]}, tip:{es:'',en:''}, photo:''};
   let photo=it.photo||''; const oldPhoto=photo; const uploaded=[];
   const allSecs=[...S.sections.values()].sort((a,b)=>(a.tab+'').localeCompare(b.tab+'')||byOrder(a,b));
-  const f={ sec:el('select',null, allSecs.map(s=>el('option',{value:s.id,selected:s.id===it.section},t(TABNAMES[s.tab])+' › '+(s.emoji||'')+' '+LL(s.title)))),
+  const f={ kind:el('select',null, el('option',{value:'place',selected:it.kind!=='dish'},t('kPlace')), el('option',{value:'dish',selected:it.kind==='dish'},t('kDish'))),
+    sec:el('select',null, allSecs.map(s=>el('option',{value:s.id,selected:s.id===it.section},t(TABNAMES[s.tab])+' › '+(s.emoji||'')+' '+LL(s.title)))),
     name:tin(it.name), tEs:tin(it.tag&&it.tag.es), tEn:tin(it.tag&&it.tag.en), addr:tin(it.address), maps:tin(it.maps,'https://maps.app.goo.gl/…'),
     dEs:tta(it.desc&&it.desc.es,3), dEn:tta(it.desc&&it.desc.en,3), bEs:tta((it.bullets&&it.bullets.es||[]).join('\n'),3), bEn:tta((it.bullets&&it.bullets.en||[]).join('\n'),3),
     tipEs:tin(it.tip&&it.tip.es), tipEn:tin(it.tip&&it.tip.en) };
@@ -782,17 +822,25 @@ function openItemForm(it, sectionId){
     file.value='';
   });
   drawPhoto();
+  let nameF,addrF,mapsF,dEsF,dEnF,bEsF,bEnF,tEsF,tEnF;
   const body=el('div',null, el('p',{class:'small muted',text:t('fEnHint')}),
     fld(t('fPhoto'),el('div',null,phBox,file)),
-    el('div',{class:'grid2'}, fld(t('fSection'),f.sec), fld(t('fName'),f.name), fld(t('fAddress'),f.addr), fld(t('fMaps'),f.maps),
-      fld(t('fDescEs'),f.dEs), fld(t('fDescEn'),f.dEn), fld(t('fBulEs'),f.bEs), fld(t('fBulEn'),f.bEn), fld(t('fTagEs'),f.tEs), fld(t('fTagEn'),f.tEn), fld(t('fTipEs'),f.tipEs), fld(t('fTipEn'),f.tipEn)));
+    el('div',{class:'grid2'}, fld(t('fKind'),f.kind), fld(t('fSection'),f.sec), (nameF=fld(t('fName'),f.name)), (addrF=fld(t('fAddress'),f.addr)), (mapsF=fld(t('fMaps'),f.maps)),
+      (dEsF=fld(t('fDescEs'),f.dEs)), (dEnF=fld(t('fDescEn'),f.dEn)), (bEsF=fld(t('fBulEs'),f.bEs)), (bEnF=fld(t('fBulEn'),f.bEn)), (tEsF=fld(t('fTagEs'),f.tEs)), (tEnF=fld(t('fTagEn'),f.tEn)), fld(t('fTipEs'),f.tipEs), fld(t('fTipEn'),f.tipEn)));
+  const syncKind=()=>{ const d=f.kind.value==='dish';
+    [addrF,mapsF,bEsF,bEnF,tEsF,tEnF].forEach(x=>x.hidden=d);
+    nameF.querySelector('label').textContent= d?t('fDishName'):t('fName');
+    dEsF.querySelector('label').textContent= d?t('fDishDescEs'):t('fDescEs');
+    dEnF.querySelector('label').textContent= d?t('fDishDescEn'):t('fDescEn'); };
+  f.kind.addEventListener('change',syncKind); syncKind();
   const del = isNew? null : armDelete(el('button',{class:'btn ghost danger small'},t('fDelete')), async()=>{ await deleteItem(it); m.close(); });
-  const m=modal(isNew?t('gNewItem'):t('gEditItem'), body, async(msg)=>{
+  const m=modal(isNew?(it.kind==='dish'?t('gNewDish'):t('gNewItem')):t('gEditItem'), body, async(msg)=>{
     if(!f.name.value.trim()){ msg.textContent=t('edErrName'); return false; }
     const sid=f.sec.value;
-    const data={section:sid, name:f.name.value.trim().slice(0,80), tag:{es:f.tEs.value.trim(),en:f.tEn.value.trim()}, address:f.addr.value.trim().slice(0,120), maps:(safeUrl(f.maps.value)||''),
+    const isDish=f.kind.value==='dish';
+    const data={kind:isDish?'dish':'place', section:sid, name:f.name.value.trim().slice(0,80), tag:{es:f.tEs.value.trim(),en:f.tEn.value.trim()}, address:f.addr.value.trim().slice(0,120), maps:(safeUrl(f.maps.value)||''),
       desc:{es:f.dEs.value.trim(),en:f.dEn.value.trim()}, bullets:{es:lines(f.bEs.value),en:lines(f.bEn.value)}, tip:{es:f.tipEs.value.trim(),en:f.tipEn.value.trim()}, photo:photo||'',
-      order: (isNew || sid!==it.section)? (Math.max(0,...itemsOf(sid).map(x=>+x.order||0))+10) : (+it.order||0)};
+      order: (isNew || sid!==it.section)? (Math.max(0,...itemsOf(sid).filter(x=>(x.kind==='dish')===isDish).map(x=>+x.order||0))+10) : (+it.order||0)};
     const ref = isNew? S.db.collection('guide').doc() : S.db.doc('guide/'+it.id);
     await ref.set(data);
     // clean up photos no longer used
@@ -804,15 +852,13 @@ function openItemForm(it, sectionId){
 /* ============ FIREBASE ============ */
 // 👉 Pega aquí la configuración de tu proyecto Firebase (Consola → Configuración del proyecto → Tus apps → Web).
 const FIREBASE_CONFIG = {
-  apiKey: "AIzaSyCFhGoRa9zx7aDgTPQ51fXQfT3AEVro6fs",
-  authDomain: "viajechile.firebaseapp.com",
-  projectId: "viajechile",
-  storageBucket: "viajechile.firebasestorage.app",
-  messagingSenderId: "108803382653",
-  appId: "1:108803382653:web:bbb2bc098d3d370f184014",
-  measurementId: "G-PNN3RWND8H"
+  apiKey: "PEGA_AQUI",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
 };
-
 const FB_VER='10.12.2';
 async function makeDb(){
   const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`);
