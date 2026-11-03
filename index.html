@@ -852,13 +852,15 @@ function openItemForm(it, sectionId, kind){
 /* ============ FIREBASE ============ */
 // 👉 Pega aquí la configuración de tu proyecto Firebase (Consola → Configuración del proyecto → Tus apps → Web).
 const FIREBASE_CONFIG = {
-  apiKey: "PEGA_AQUI",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: ""
+  apiKey: "AIzaSyCFhGoRa9zx7aDgTPQ51fXQfT3AEVro6fs",
+  authDomain: "viajechile.firebaseapp.com",
+  projectId: "viajechile",
+  storageBucket: "viajechile.firebasestorage.app",
+  messagingSenderId: "108803382653",
+  appId: "1:108803382653:web:bbb2bc098d3d370f184014",
+  measurementId: "G-PNN3RWND8H"
 };
+
 const FB_VER='10.12.2';
 async function makeDb(){
   const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`);
