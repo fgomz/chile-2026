@@ -91,9 +91,11 @@ table.tl thead .name{background:#F8FAFC;font-size:12px;color:var(--muted)}
 table.tl .name .av{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--line);font-size:12px;font-weight:700;align-items:center;justify-content:center;margin-right:10px;vertical-align:middle}
 table.tl td.wedcol{background:var(--sun-bg)}
 table.tl tr.cnt td{height:64px;vertical-align:bottom}
-table.tl tr.cnt .name{font-weight:700;color:var(--red-d);font-size:12px;vertical-align:bottom;padding-bottom:12px}
+table.tl tr.cnt .name{vertical-align:bottom;padding-bottom:10px;white-space:normal}
 .cntcell{text-align:center;padding-bottom:8px !important}
-.cntcell .n{display:block;font-size:11px;font-weight:700;color:var(--red-d)}
+.cntcell .n{display:block;font-size:11px;font-weight:700;color:var(--ink)}
+.cntlbl{display:block;font-size:11px;font-weight:600;color:var(--muted);text-transform:none}
+.cntsel{max-width:100%;border:1px solid var(--line2);border-radius:8px;padding:4px 6px;font-size:13px;font-weight:700;background:#fff;color:var(--ink)}
 .cntcell .b{display:inline-block;width:18px;border-radius:5px 5px 2px 2px;background:#F2A49E}
 .cntcell .b.w{background:var(--red)}
 td.seg{padding:9px 2px !important}
@@ -114,6 +116,22 @@ tr.me .name{color:var(--red-d)}
 .pill{background:var(--red-bg);color:var(--red-ink);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600}
 .pill.other{background:#EEF2F7;color:var(--ink)}
 .empty{text-align:center;padding:40px 16px}
+#plist{margin-top:24px}
+#plist:empty{display:none}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:12px}
+.pcard{border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.pcard.me{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset}
+.pcard .ph{display:flex;align-items:center;gap:10px}
+.pcard .ph b{font-size:16px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .av{display:inline-flex;width:30px;height:30px;border-radius:50%;background:var(--line);font-size:12px;font-weight:700;align-items:center;justify-content:center;flex-shrink:0}
+.pcard .edit{border:0;background:#F3F6FA;border-radius:10px;width:36px;height:36px;color:var(--muted)}
+.pcard ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.pcard li{display:flex;gap:10px;align-items:flex-start}
+.pcard li i{width:10px;height:10px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.pcard li div{display:flex;flex-direction:column;min-width:0}
+.pcard .pl{font-weight:700}
+.pcard .dt{font-size:14px;color:var(--ink2)}
+.pcard .nt{font-size:13px;color:var(--muted)}
 .hint{font-size:13px;color:var(--muted);margin:0}
 
 /* editor */
@@ -242,6 +260,7 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28p
       </div>
       <div id="daypanel"></div>
     </div>
+    <div id="plist"></div>
   </section>
 
   <section class="view" id="v-mine">
@@ -266,8 +285,8 @@ const T = {
     title:"¿Quién está dónde?",
     subtitle:"Anota tus fechas, mira quién coincide contigo en Santiago o de viaje, y usa la guía para comer, tomar y pasear como local.",
     tabWho:"Quién está dónde", tabMine:"Mi itinerario", tabSee:"Qué ver", tabEat:"Comer y tomar", tabTips:"Tips", tabWhoS:"Calendario", tabMineS:"Mi viaje", tabSeeS:"Ver", tabEatS:"Comer", tabTipsS:"Tips", brand:"Chile · Boda & Viaje", addMine:"+ Anotar mis fechas", daysWord:"días", wedEyebrow:"Día de la boda", dayEyebrow:"Día seleccionado", people1:"persona", peopleN:"personas", whereEat:"¿Dónde comer?",
-    whoTitle:"Calendario del grupo", whoHint:"Toca un día para ver quién está dónde. La columna amarilla es el día de la boda.",
-    inSantiago:"En Santiago", noData:"Sin datos",
+    whoTitle:"Calendario del grupo", whoHint:"Toca un día para ver quién está dónde. Toca una ciudad (o elígela a la izquierda) para contar cuántos hay ahí cada día. La columna amarilla es el día de la boda.",
+    inSantiago:"En Santiago", countIn:"Cuántos hay en", plTitle:"Itinerario de cada uno", noData:"Sin datos",
     daysTo:"para la boda", weddingToday:"¡La boda es hoy! 💍", weddingPast:"La boda ya pasó — ¡qué fiesta!",
     loading:"Cargando itinerarios…", slow:"Los itinerarios están tardando en cargar. Revisa tu conexión; esta página se actualiza sola.",
     noDb:"La base de datos no está configurada todavía: falta pegar la configuración de Firebase en el archivo (ver README).",
@@ -297,8 +316,8 @@ const T = {
     title:"Who's where?",
     subtitle:"Add your dates, see who overlaps with you in Santiago or on the road, and use the guide to eat, drink and wander like a local.",
     tabWho:"Who's where", tabMine:"My itinerary", tabSee:"What to see", tabEat:"Eat & drink", tabTips:"Tips", tabWhoS:"Calendar", tabMineS:"My trip", tabSeeS:"See", tabEatS:"Eat", tabTipsS:"Tips", brand:"Chile · Wedding & Trip", addMine:"+ Add my dates", daysWord:"days", wedEyebrow:"Wedding day", dayEyebrow:"Selected day", people1:"person", peopleN:"people", whereEat:"Where to eat?",
-    whoTitle:"Group calendar", whoHint:"Tap a day to see who's where. The yellow column is the wedding day.",
-    inSantiago:"In Santiago", noData:"No data",
+    whoTitle:"Group calendar", whoHint:"Tap a day to see who's where. Tap a city (or pick it on the left) to count how many are there each day. The yellow column is the wedding day.",
+    inSantiago:"In Santiago", countIn:"How many in", plTitle:"Everyone's itinerary", noData:"No data",
     daysTo:"to the wedding", weddingToday:"The wedding is today! 💍", weddingPast:"The wedding has happened — what a party!",
     loading:"Loading itineraries…", slow:"Itineraries are taking a while. Check your connection; this page updates by itself.",
     noDb:"The database isn't configured yet: the Firebase config still needs to be pasted into the file (see README).",
@@ -419,6 +438,29 @@ function statusBox(container){
   else if(S.dbState==='loading') box.append(el('div',{class:'notice',text:t('loading')}));
   else if(S.dbState==='slow') box.append(el('div',{class:'notice',text:t('slow')}));
 }
+function fmtRange(a,b){
+  const loc=lang==='es'?'es-CL':'en-GB', A=parse(a), B=parse(b);
+  const mon=d=>d.toLocaleDateString(loc,{month:'short',timeZone:'UTC'}).replace('.','');
+  if(a===b) return A.getUTCDate()+' '+mon(A);
+  if(A.getUTCMonth()===B.getUTCMonth()) return A.getUTCDate()+'–'+B.getUTCDate()+' '+mon(B);
+  return A.getUTCDate()+' '+mon(A)+' – '+B.getUTCDate()+' '+mon(B);
+}
+function renderPeopleList(trips){
+  const box=$('#plist'); box.replaceChildren();
+  if(!trips.length) return;
+  box.append(el('div',{class:'card plist'},
+    el('div',{class:'h2row',style:'margin:0 0 4px'}, el('h2',{text:t('plTitle')})),
+    el('div',{class:'pgrid'}, trips.map(tr=>{
+      const stops=tr.stops.filter(x=>x.place&&x.from&&x.to).slice().sort((a,b)=>a.from.localeCompare(b.from));
+      const canEdit = tr.id===S.me || S.isOwner;
+      return el('div',{class:'pcard'+(tr.id===S.me?' me':'')},
+        el('div',{class:'ph'}, el('span',{class:'av',text:(tr.name||'?').trim().slice(0,2).toUpperCase()}), el('b',{text:tr.name||'—'}),
+          canEdit? el('button',{class:'edit','aria-label':t('edTitle'),onclick:()=>{ S.editingId=tr.id; draftFor=undefined; renderEditor(); location.hash='mine'; showTab('mine'); window.scrollTo({top:0}); }},'✎'):null),
+        stops.length? el('ul',null, stops.map(x=>el('li',null,
+          el('i',{style:'background:'+colorFor(x.place)}),
+          el('div',null, el('span',{class:'pl',text:x.place}), el('span',{class:'dt',text:fmtRange(x.from,x.to)}), x.note? el('span',{class:'nt',text:x.note}):null)))) : el('span',{class:'muted small',text:t('noData')}));
+    }))));
+}
 function renderWho(){
   statusBox('#who-status');
   const c=cfg(), days=dayList(c.start,c.end), trips=sortedTrips();
@@ -437,12 +479,16 @@ function renderWho(){
   });
   tbl.append(el('thead',null,hr));
   const tb=el('tbody');
-  // santiago count row
-  if(trips.length){
-    const cr=el('tr',{class:'cnt'}, el('td',{class:'name',text:t('inSantiago')}));
-    const cnt=days.map(d=>trips.filter(tr=>placesOn(tr,d).some(isSantiago)).length);
-    const max=Math.max(1,...cnt);
-    days.forEach((d,i)=>{ const n=cnt[i]; cr.append(el('td',{class:'cntcell'}, n? el('span',{class:'n',text:String(n)}):null, n? el('span',{class:'b'+(d===c.weddingDate?' w':''),style:'height:'+Math.round(6+28*n/max)+'px'}):null)); });
+  // per-city count row (city chosen in the select or by tapping a legend chip)
+  if(trips.length && allPlaces.length){
+    const cp = (S.filter && allPlaces.find(p=>norm(p)===norm(S.filter))) || allPlaces.find(isSantiago) || allPlaces[0];
+    const inCp = p => isSantiago(cp) ? isSantiago(p) : norm(p)===norm(cp);
+    const sel=el('select',{class:'cntsel','aria-label':t('countIn'),onchange:e=>{ S.filter=e.target.value; renderWho(); }},
+      allPlaces.map(p=>el('option',{value:p,selected:norm(p)===norm(cp)},p)));
+    const cr=el('tr',{class:'cnt'}, el('td',{class:'name'}, el('span',{class:'cntlbl',text:t('countIn')}), sel));
+    const cnt=days.map(d=>trips.filter(tr=>placesOn(tr,d).some(inCp)).length);
+    const max=Math.max(1,...cnt); const col=colorFor(cp);
+    days.forEach((d,i)=>{ const n=cnt[i]; cr.append(el('td',{class:'cntcell'}, n? el('span',{class:'n',text:String(n)}):null, n? el('span',{class:'b',style:'background:'+col+';opacity:'+(d===c.weddingDate?1:.55)+';height:'+Math.round(6+28*n/max)+'px'}):null)); });
     tb.append(cr);
   }
   trips.forEach(tr=>{
@@ -461,7 +507,7 @@ function renderWho(){
         const bg= cols.length===1? cols[0] : `linear-gradient(90deg,${cols.join(',')})`;
         const dim = S.filter && !key.some(p=>norm(p)===norm(S.filter));
         const notes = tr.stops.filter(s=>key.includes(s.place.trim()) && s.note).map(s=>s.note).join(' · ');
-        row.append(el('td',{class:'seg',colspan:span}, el('div',{class:'bar'+(dim?' dim':'')+(cols.length===1&&isLight(cols[0])?' dark':''),style:'background:'+bg, title: k + (notes?'\n'+notes:'')}, span>=2? k : key[0].slice(0,3))));
+        row.append(el('td',{class:'seg',colspan:span}, el('div',{class:'bar'+(dim?' dim':'')+(cols.length===1&&isLight(cols[0])?' dark':''),style:'background:'+bg, title: k + (notes?'\n'+notes:'')}, span>=2? (span>=4 && key.length===1 ? k+' · '+fmtRange(days[i],days[j-1]) : k) : key[0].slice(0,3))));
       }
       i=j;
     }
@@ -470,6 +516,7 @@ function renderWho(){
   tbl.append(tb);
   if(!trips.length && (S.dbState==='ready')){ tbl.replaceChildren(el('tr',null, el('td',{class:'empty muted',text:t('empty')}))); }
   renderDayPanel(trips);
+  renderPeopleList(trips);
 }
 function renderDayPanel(trips){
   const box=$('#daypanel'); box.replaceChildren();
@@ -860,7 +907,6 @@ const FIREBASE_CONFIG = {
   appId: "1:108803382653:web:bbb2bc098d3d370f184014",
   measurementId: "G-PNN3RWND8H"
 };
-
 const FB_VER='10.12.2';
 async function makeDb(){
   const { initializeApp } = await import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`);
