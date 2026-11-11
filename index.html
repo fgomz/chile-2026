@@ -116,6 +116,8 @@ tr.me .name{color:var(--red-d)}
 .pill{background:var(--red-bg);color:var(--red-ink);border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600}
 .pill.other{background:#EEF2F7;color:var(--ink)}
 .empty{text-align:center;padding:40px 16px}
+.name .nm{display:inline-block;max-width:120px;overflow:hidden;text-overflow:ellipsis;vertical-align:middle}
+.swipe{display:none;margin:0;font-size:13px;font-weight:600;color:var(--muted);text-align:center}
 #plist{margin-top:24px}
 #plist:empty{display:none}
 .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-top:12px}
@@ -133,6 +135,96 @@ tr.me .name{color:var(--red-d)}
 .pcard .dt{font-size:14px;color:var(--ink2)}
 .pcard .nt{font-size:13px;color:var(--muted)}
 .hint{font-size:13px;color:var(--muted);margin:0}
+
+
+/* gantt */
+.gctl{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.segs{display:inline-flex;background:#EEF2F7;border-radius:12px;padding:4px;gap:2px}
+.seg{border:0;background:transparent;border-radius:9px;padding:8px 14px;font-weight:600;color:var(--muted);min-height:38px}
+.seg.on{background:#fff;color:var(--ink);font-weight:700;box-shadow:0 1px 2px rgba(15,30,51,.12)}
+.btn.zoom{min-height:40px;padding:8px 14px}
+.g-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#fff;-webkit-overflow-scrolling:touch}
+.g-inner{position:relative}
+.g-ov{position:absolute;top:0;bottom:0;pointer-events:none;z-index:0}
+.g-ov>div{position:absolute;top:0;bottom:0}
+.g-we{background:#F3F6FA}
+.g-wed{background:var(--sun-bg);box-shadow:inset 1px 0 0 #F3D27A,inset -1px 0 0 #F3D27A}
+.g-sel{box-shadow:inset 0 0 0 2px rgba(215,55,47,.35)}
+.g-today{width:2px;margin-left:-1px;background:var(--red)}
+.g-row{display:flex;border-bottom:1px solid #EEF2F7;position:relative}
+.g-row:last-child{border-bottom:0}
+.g-lab{position:sticky;left:0;z-index:3;background:#fff;flex-shrink:0;display:flex;align-items:center;padding:0 8px 0 12px;font-weight:600;font-size:14px;min-width:0;border-right:1px solid var(--line)}
+.g-lab .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.g-name{display:flex;align-items:center;gap:4px;min-width:0;width:100%}
+.g-name .edit{border:0;background:none;color:var(--muted);font-size:13px;min-height:32px;padding:0 4px;flex-shrink:0}
+.g-row.me .g-lab{color:var(--red-d)}
+.g-track{position:relative;flex-shrink:0;z-index:1;cursor:pointer}
+.g-head{border-bottom:1px solid var(--line)}
+.g-head .g-lab,.g-head .g-track{background:#F8FAFC}
+.g-head .g-track{background:transparent}
+.g-tick{position:absolute;bottom:0;top:16px;border:0;background:transparent;padding:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;color:var(--ink);font-size:11px}
+.g-tick b{font-size:13px}
+.g-tick .wd{font-size:10px;color:var(--muted);font-weight:600}
+.g-tick.wed{background:var(--sun);border-radius:8px 8px 0 0}
+.g-tick.sel b{color:var(--red-d)}
+.g-month{position:absolute;top:2px;font-size:11px;font-weight:700;text-transform:capitalize;color:var(--muted);white-space:nowrap}
+.g-count .g-lab{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px}
+.g-cnt{position:absolute;bottom:6px;display:flex;flex-direction:column;align-items:center;gap:1px;pointer-events:none}
+.g-cnt span{font-size:10px;font-weight:700}
+.g-cnt i{display:block;border-radius:4px 4px 1px 1px}
+.g-bar{position:absolute;border:0;border-radius:8px;color:#fff;font-size:12px;font-weight:700;padding:0 8px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 1px 2px rgba(15,30,51,.15)}
+.g-bar.dark{color:var(--navy)}
+.g-bar.dim{opacity:.18}
+.g-bar.picked{outline:3px solid var(--navy);outline-offset:1px;z-index:2}
+.g-out{position:absolute;display:flex;align-items:center;font-size:12px;font-weight:700;color:var(--ink2);white-space:nowrap;pointer-events:none}
+.g-group{display:flex;background:#F8FAFC;border-bottom:1px solid var(--line);border-top:1px solid var(--line)}
+.g-glab{background:#F8FAFC;font-weight:700;gap:8px;padding-top:10px;padding-bottom:10px;width:auto !important;min-width:var(--lw);border-right:0;position:sticky}
+.g-glab i{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.g-glab span{white-space:nowrap}
+.g-glab em{font-style:normal;font-size:12px;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:999px;padding:0 8px}
+.gpop{display:flex;align-items:center;gap:12px;background:var(--navy);color:#fff;border-radius:14px;padding:10px 10px 10px 14px}
+.gpop>i{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+.gpop .gp-txt{display:flex;flex-direction:column;flex:1;min-width:0}
+.gpop .gp-txt span{font-size:14px;color:var(--sky)}
+.gpop .btn{background:transparent;color:#fff;border-color:#3A5578;min-height:40px;padding:6px 12px}
+#gpop:empty{display:none}
+@media (max-width:720px){ .g-lab{padding:0 4px 0 8px;font-size:13px} .seg{padding:8px 10px} }
+
+
+/* month calendar */
+.months{display:flex;flex-direction:column;gap:22px}
+.mtitle{font-size:20px;margin-bottom:10px}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.mwd{text-align:center;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;padding-bottom:2px}
+.mc{min-height:92px;border:1px solid var(--line);background:#fff;border-radius:12px;padding:6px 7px;display:flex;flex-direction:column;gap:5px;text-align:left;align-items:stretch;min-width:0}
+button.mc:hover{border-color:var(--line2);box-shadow:var(--shadow)}
+.mc.blank{border:0;background:transparent}
+.mc.out{background:transparent;border-style:dashed;color:#A9B4C2}
+.mc.we:not(.wed){background:#F8FAFC}
+.mc.wed{background:var(--sun-bg);border-color:#F0C75A}
+.mc.sel{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy) inset}
+.mc.today .mtop b{background:var(--red);color:#fff;border-radius:999px;padding:0 6px}
+.mtop{display:flex;align-items:center;justify-content:space-between}
+.mtop b{font-size:14px}
+.mring{width:16px;height:16px;border-radius:50%;background:var(--sun);box-shadow:inset 0 0 0 4px var(--sun),inset 0 0 0 6px var(--navy)}
+.mcities{display:flex;flex-direction:column;gap:3px;min-width:0}
+.mcity{display:flex;align-items:center;gap:5px;font-size:12px;min-width:0}
+.mcity i{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.mcity .ms{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink2);flex:1;min-width:0}
+.mcity em{font-style:normal;font-weight:800;font-size:12px;color:var(--ink)}
+.more{font-size:11px;color:var(--muted);font-weight:700}
+@media (max-width:720px){
+  .mgrid{gap:3px}
+  .mc{min-height:64px;padding:4px 3px;border-radius:9px;gap:3px}
+  .mtop b{font-size:12px}
+  .mring{width:12px;height:12px;box-shadow:inset 0 0 0 3px var(--sun),inset 0 0 0 5px var(--navy)}
+  .mcity{gap:3px;justify-content:center}
+  .mcity .ms{display:none}
+  .mcity i{width:7px;height:7px}
+  .mcity em{font-size:11px}
+  .segs{width:100%}
+  .seg{flex:1}
+}
 
 /* editor */
 .stop{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr auto;gap:10px;align-items:end;padding:14px;margin:10px 0;border-radius:16px;background:#F8FAFC;border:1px solid var(--line)}
@@ -200,8 +292,13 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28p
   .stop .p,.stop .n{grid-column:1/-1}
   .stop .x{grid-column:2;justify-self:end}
   .grid2{grid-template-columns:1fr}
-  table.tl .name{min-width:96px;max-width:110px;padding:0 8px}
-  table.tl .name .av{display:none}
+  table.tl .name{min-width:0;width:84px;padding:0 6px 0 10px}
+  table.tl .name .av,table.tl .name .edit,.cntlbl{display:none}
+  .name .nm{max-width:72px;font-size:13px}
+  .cntsel{max-width:74px;font-size:12px;padding:3px 2px}
+  table.tl th.day{min-width:34px;width:34px}
+  .bar{font-size:12px;padding:0 6px}
+  .swipe{display:block}
 }
 .edbar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:6px;position:sticky;top:8px;z-index:5}
 .ctl{display:inline-flex;gap:4px;margin-left:auto}
@@ -255,7 +352,9 @@ footer{color:var(--muted);font-size:12px;text-align:center;padding:20px 20px 28p
       <div class="card tlcard">
         <div class="h2row" style="margin:0"><h2 data-i="whoTitle"></h2><button class="btn primary" id="addMine" data-i="addMine"></button></div>
         <div class="legend" id="legend"></div>
-        <div class="tl-scroll"><table class="tl" id="tl"></table></div>
+        <div class="gctl" id="gctl"></div>
+        <div id="gantt"></div>
+        <div id="gpop"></div>
         <p class="hint" data-i="whoHint"></p>
       </div>
       <div id="daypanel"></div>
@@ -285,8 +384,8 @@ const T = {
     title:"¿Quién está dónde?",
     subtitle:"Anota tus fechas, mira quién coincide contigo en Santiago o de viaje, y usa la guía para comer, tomar y pasear como local.",
     tabWho:"Quién está dónde", tabMine:"Mi itinerario", tabSee:"Qué ver", tabEat:"Comer y tomar", tabTips:"Tips", tabWhoS:"Calendario", tabMineS:"Mi viaje", tabSeeS:"Ver", tabEatS:"Comer", tabTipsS:"Tips", brand:"Chile · Boda & Viaje", addMine:"+ Anotar mis fechas", daysWord:"días", wedEyebrow:"Día de la boda", dayEyebrow:"Día seleccionado", people1:"persona", peopleN:"personas", whereEat:"¿Dónde comer?",
-    whoTitle:"Calendario del grupo", whoHint:"Toca un día para ver quién está dónde. Toca una ciudad (o elígela a la izquierda) para contar cuántos hay ahí cada día. La columna amarilla es el día de la boda.",
-    inSantiago:"En Santiago", countIn:"Cuántos hay en", plTitle:"Itinerario de cada uno", noData:"Sin datos",
+    whoTitle:"Calendario del grupo", whoHint:"Toca un día para ver quién está dónde. En Personas y Ciudades, toca una barra para ver el detalle. Amarillo = día de la boda.",
+    inSantiago:"En Santiago", countIn:"Cuántos hay en", gMonth:"Mes", gByPerson:"Personas", gByCity:"Ciudades", gZoomIn:"Ampliar", gFit:"Ver todo el mes", swipe:"← Desliza el calendario para ver todos los días →", plTitle:"Itinerario de cada uno", noData:"Sin datos",
     daysTo:"para la boda", weddingToday:"¡La boda es hoy! 💍", weddingPast:"La boda ya pasó — ¡qué fiesta!",
     loading:"Cargando itinerarios…", slow:"Los itinerarios están tardando en cargar. Revisa tu conexión; esta página se actualiza sola.",
     noDb:"La base de datos no está configurada todavía: falta pegar la configuración de Firebase en el archivo (ver README).",
@@ -316,8 +415,8 @@ const T = {
     title:"Who's where?",
     subtitle:"Add your dates, see who overlaps with you in Santiago or on the road, and use the guide to eat, drink and wander like a local.",
     tabWho:"Who's where", tabMine:"My itinerary", tabSee:"What to see", tabEat:"Eat & drink", tabTips:"Tips", tabWhoS:"Calendar", tabMineS:"My trip", tabSeeS:"See", tabEatS:"Eat", tabTipsS:"Tips", brand:"Chile · Wedding & Trip", addMine:"+ Add my dates", daysWord:"days", wedEyebrow:"Wedding day", dayEyebrow:"Selected day", people1:"person", peopleN:"people", whereEat:"Where to eat?",
-    whoTitle:"Group calendar", whoHint:"Tap a day to see who's where. Tap a city (or pick it on the left) to count how many are there each day. The yellow column is the wedding day.",
-    inSantiago:"In Santiago", countIn:"How many in", plTitle:"Everyone's itinerary", noData:"No data",
+    whoTitle:"Group calendar", whoHint:"Tap a day to see who's where. In People and Cities, tap a bar for details. Yellow = wedding day.",
+    inSantiago:"In Santiago", countIn:"How many in", gMonth:"Month", gByPerson:"People", gByCity:"Cities", gZoomIn:"Zoom in", gFit:"Fit whole month", swipe:"← Swipe the calendar to see every day →", plTitle:"Everyone's itinerary", noData:"No data",
     daysTo:"to the wedding", weddingToday:"The wedding is today! 💍", weddingPast:"The wedding has happened — what a party!",
     loading:"Loading itineraries…", slow:"Itineraries are taking a while. Check your connection; this page updates by itself.",
     noDb:"The database isn't configured yet: the Firebase config still needs to be pasted into the file (see README).",
@@ -388,7 +487,7 @@ function colorFor(place){
 const isSantiago = p => norm(p).startsWith('santiago') || norm(p)==='stgo';
 
 /* ============ state ============ */
-const S = { trips:new Map(), config:{}, db:null, user:null, me:null, isOwner:false, dbState:'loading', selDay:null, filter:null, editingId:null, readOnly:false, names:{} };
+const S = { gView:'month', gZoom:false, gSel:null, trips:new Map(), config:{}, db:null, user:null, me:null, isOwner:false, dbState:'loading', selDay:null, filter:null, editingId:null, readOnly:false, names:{} };
 const cfg = () => ({ start: isDate(S.config.start)?S.config.start:'2026-12-01', end: isDate(S.config.end)?S.config.end:'2026-12-31', weddingDate: isDate(S.config.weddingDate)?S.config.weddingDate:null, weddingPlace: typeof S.config.weddingPlace==='string'?S.config.weddingPlace:'' });
 const cleanTrip = (id, d) => ({ id, name: typeof d.name==='string'?d.name.slice(0,60):'', stops: Array.isArray(d.stops)? d.stops.filter(s=>s&&typeof s==='object').map(s=>({place:String(s.place||'').slice(0,60), from:isDate(s.from)?s.from:'', to:isDate(s.to)?s.to:'', note:String(s.note||'').slice(0,140)})) : [] });
 
@@ -421,9 +520,11 @@ function showTab(id){
   if(!TABS.includes(id)) id='who';
   document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.tab===id));
   document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+id));
+  if(id==='who' && S.trips && S.trips.size) renderWho();
 }
 $('#tabs').addEventListener('click',e=>{ const b=e.target.closest('button[data-tab]'); if(!b) return; location.hash=b.dataset.tab; showTab(b.dataset.tab); });
 window.addEventListener('hashchange',()=>showTab(location.hash.slice(1)));
+let _rz; window.addEventListener('resize',()=>{ clearTimeout(_rz); _rz=setTimeout(()=>{ if($('#v-who').classList.contains('on')) renderWho(); },150); });
 S.eatQ=''; $('#eatq').addEventListener('input',e=>{ S.eatQ=e.target.value; renderGuide('eat'); });
 $('#addMine').addEventListener('click',()=>{ S.editingId=S.me; location.hash='mine'; showTab('mine'); window.scrollTo({top:0,behavior:'smooth'}); });
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{ lang=b.dataset.lang; try{localStorage.setItem('lang',lang)}catch(e){} renderAll(); }));
@@ -461,60 +562,176 @@ function renderPeopleList(trips){
           el('div',null, el('span',{class:'pl',text:x.place}), el('span',{class:'dt',text:fmtRange(x.from,x.to)}), x.note? el('span',{class:'nt',text:x.note}):null)))) : el('span',{class:'muted small',text:t('noData')}));
     }))));
 }
+const SHORT={santiago:'Stgo','san pedro de atacama':'Atacama','torres del paine / puerto natales':'Paine','valparaiso':'Valpo','vina del mar':'Viña','cajon del maipo':'Cajón','la serena / valle del elqui':'Elqui','rapa nui / isla de pascua':'Rapa Nui','puerto varas':'P. Varas','punta arenas':'P. Arenas','buenos aires (ar)':'BA','mendoza (ar)':'Mendoza','valle de casablanca':'Casablanca','valle de colchagua':'Colchagua'};
+function shortPlace(p){ const n=norm(p); if(SHORT[n]) return SHORT[n]; const first=p.split('/')[0].replace(/\(.*?\)/g,'').trim(); const w=first.split(/\s+/).filter(x=>x.length>2); return (w.length>1? w[w.length-1] : first).slice(0,9); }
+function renderMonth(box, trips, days, c, selDay, allPlaces){
+  const loc=lang==='es'?'es-CL':'en-GB';
+  const inRange=new Set(days);
+  const months=[]; days.forEach(d=>{ const k=d.slice(0,7); if(!months.includes(k)) months.push(k); });
+  const wdNames=[...Array(7)].map((_,i)=>parse('2026-11-'+String(2+i).padStart(2,'0')).toLocaleDateString(loc,{weekday:'narrow',timeZone:'UTC'})); // Mon..Sun
+  const todayIso=iso(new Date(Date.UTC(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())));
+  const mobile = window.matchMedia && window.matchMedia('(max-width:720px)').matches;
+  const wrap=el('div',{class:'months'});
+  months.forEach(k=>{
+    const [y,m]=k.split('-').map(Number);
+    const first=new Date(Date.UTC(y,m-1,1)), nDays=new Date(Date.UTC(y,m,0)).getUTCDate();
+    const lead=(first.getUTCDay()+6)%7;
+    const grid=el('div',{class:'mgrid'});
+    wdNames.forEach(w=>grid.append(el('div',{class:'mwd',text:w})));
+    for(let i=0;i<lead;i++) grid.append(el('div',{class:'mc blank'}));
+    for(let n=1;n<=nDays;n++){
+      const d=k+'-'+String(n).padStart(2,'0'); const wd=parse(d).getUTCDay();
+      if(!inRange.has(d)){ grid.append(el('div',{class:'mc out'}, el('b',{text:String(n)}))); continue; }
+      const counts=new Map();
+      trips.forEach(tr=>placesOn(tr,d).forEach(p=>{ const key=[...counts.keys()].find(x=>norm(x)===norm(p)||(isSantiago(x)&&isSantiago(p)))||p; counts.set(key,(counts.get(key)||0)+1); }));
+      let list=[...counts.entries()];
+      if(S.filter) list=list.filter(([p])=> norm(p)===norm(S.filter) || (isSantiago(S.filter)&&isSantiago(p)));
+      list.sort((a,b)=>(isSantiago(b[0])-isSantiago(a[0]))||b[1]-a[1]);
+      const maxShow = mobile? 2 : 3;
+      const cls=['mc']; if(wd===0||wd===6) cls.push('we'); if(d===c.weddingDate) cls.push('wed'); if(d===selDay) cls.push('sel'); if(d===todayIso) cls.push('today');
+      grid.append(el('button',{class:cls.join(' '),'aria-label':fmtDay(d)+(list.length? ': '+list.map(([p,n])=>p+' '+n).join(', '):''),onclick:()=>{
+          S.selDay=d; renderWho();
+          if(mobile){ const dp=$('#daypanel'); if(dp) dp.scrollIntoView({behavior:'smooth',block:'start'}); } }},
+        el('div',{class:'mtop'}, el('b',{text:String(n)}), d===c.weddingDate? el('span',{class:'mring','aria-hidden':'true'}) : null),
+        el('div',{class:'mcities'}, list.slice(0,maxShow).map(([p,n])=> el('span',{class:'mcity'}, el('i',{style:'background:'+colorFor(p)}), el('span',{class:'ms',text:shortPlace(p)}), el('em',{text:String(n)}))),
+          list.length>maxShow? el('span',{class:'more',text:'+'+(list.length-maxShow)}):null)));
+    }
+    wrap.append(el('div',{class:'month'}, el('h3',{class:'mtitle',text:(x=>x.charAt(0).toUpperCase()+x.slice(1))(first.toLocaleDateString(loc,{month:'long',year:'numeric',timeZone:'UTC'}))}), grid));
+  });
+  box.append(wrap);
+}
 function renderWho(){
   statusBox('#who-status');
   const c=cfg(), days=dayList(c.start,c.end), trips=sortedTrips();
+  const selDay = S.selDay || c.weddingDate;
   // legend
   const allPlaces=[]; trips.forEach(tr=>tr.stops.forEach(s=>{ const p=s.place.trim(); if(p && !allPlaces.some(x=>norm(x)===norm(p))) allPlaces.push(p); }));
   allPlaces.sort((a,b)=> (isSantiago(b)-isSantiago(a)) || a.localeCompare(b));
   $('#legend').replaceChildren(...allPlaces.map(p=> el('button',{class:'chip'+(S.filter&&norm(S.filter)===norm(p)?' on':''), onclick:()=>{ S.filter = (S.filter&&norm(S.filter)===norm(p))?null:p; renderWho(); }}, el('i',{style:'background:'+colorFor(p)}), p)));
-  const tbl=$('#tl'); tbl.replaceChildren();
-  // header
-  const hr=el('tr',null, el('th',{class:'name'}, ''));
-  days.forEach(d=>{
-    const dt=parse(d), wd=dt.getUTCDay();
-    const cls=['day']; if(wd===0||wd===6) cls.push('we'); if(d===c.weddingDate) cls.push('wed'); if(d===(S.selDay||c.weddingDate)) cls.push('sel');
-    const wl=dt.toLocaleDateString(lang==='es'?'es-CL':'en-GB',{weekday:'narrow',timeZone:'UTC'});
-    hr.append(el('th',{class:cls.join(' '), title: d===c.weddingDate? t('wedding'):fmtDay(d), onclick:()=>{ S.selDay = d; renderWho(); }}, wl, el('b',{text:String(dt.getUTCDate())})));
+  // controls
+  const seg=(val,label)=>el('button',{class:'seg'+(S.gView===val?' on':''),'aria-pressed':String(S.gView===val),onclick:()=>{ S.gView=val; S.gSel=null; renderWho(); }},label);
+  $('#gctl').replaceChildren(...[
+    el('div',{class:'segs',role:'group'}, seg('month',t('gMonth')), seg('person',t('gByPerson')), seg('city',t('gByCity'))),
+    S.gView!=='month'? el('button',{class:'btn zoom',onclick:()=>{ S.gZoom=!S.gZoom; S.didScroll=false; renderWho(); }}, S.gZoom? t('gFit') : t('gZoomIn')) : null].filter(Boolean));
+  const box=$('#gantt'); box.replaceChildren();
+  $('#gpop').replaceChildren();
+  if(!trips.length){ if(S.dbState==='ready') box.append(el('div',{class:'empty muted',text:t('empty')})); renderDayPanel(trips); renderPeopleList(trips); return; }
+  if(!days.length){ renderDayPanel(trips); renderPeopleList(trips); return; }
+  if(S.gView==='month'){ renderMonth(box, trips, days, c, selDay, allPlaces); renderDayPanel(trips); renderPeopleList(trips); return; }
+
+  // geometry
+  const W = Math.max(280, box.clientWidth || box.parentElement.clientWidth || 800);
+  const labelW = W < 560 ? 92 : 168;
+  const fitW = (W - labelW - 2) / days.length;
+  const dayW = S.gZoom ? Math.max(36, fitW) : Math.max(7, fitW);
+  const trackW = dayW * days.length;
+  const idx = d => days.indexOf(d);
+  const clampIdx = d => d < days[0] ? 0 : (d > days[days.length-1] ? days.length-1 : idx(d));
+  const loc = lang==='es'?'es-CL':'en-GB';
+  const dim = p => S.filter && norm(p)!==norm(S.filter) && !(isSantiago(S.filter)&&isSantiago(p));
+
+  const scroll=el('div',{class:'g-scroll'});
+  const inner=el('div',{class:'g-inner',style:`width:${labelW+trackW}px;--lw:${labelW}px`});
+  scroll.append(inner);
+
+  // background overlay: weekends, wedding, selected day
+  const overlay=el('div',{class:'g-ov',style:`left:${labelW}px;width:${trackW}px`});
+  days.forEach((d,i)=>{ const wd=parse(d).getUTCDay();
+    if(d===c.weddingDate) overlay.append(el('div',{class:'g-wed',style:`left:${i*dayW}px;width:${dayW}px`}));
+    else if(wd===0||wd===6) overlay.append(el('div',{class:'g-we',style:`left:${i*dayW}px;width:${dayW}px`}));
+    if(d===selDay) overlay.append(el('div',{class:'g-sel',style:`left:${i*dayW}px;width:${dayW}px`}));
   });
-  tbl.append(el('thead',null,hr));
-  const tb=el('tbody');
-  // per-city count row (city chosen in the select or by tapping a legend chip)
-  if(trips.length && allPlaces.length){
+  const todayIso=iso(new Date(Date.UTC(new Date().getFullYear(),new Date().getMonth(),new Date().getDate())));
+  if(idx(todayIso)>=0) overlay.append(el('div',{class:'g-today',style:`left:${(idx(todayIso)+.5)*dayW}px`}));
+  inner.append(overlay);
+
+  const pickDay = (track,e)=>{ const r=track.getBoundingClientRect(); const i=Math.floor((e.clientX-r.left)/dayW); if(days[i]){ S.selDay=days[i]; S.gSel=null; renderWho(); } };
+  const row=(cls,label,trackKids,h)=>{ const tr=el('div',{class:'g-track',style:`width:${trackW}px;height:${h}px`},trackKids); 
+    tr.addEventListener('click',e=>{ if(e.target===tr) pickDay(tr,e); });
+    return el('div',{class:'g-row '+(cls||'')}, el('div',{class:'g-lab',style:`width:${labelW}px`},label), tr); };
+
+  // header: months + days
+  const showNum = dayW >= 16, showWd = dayW >= 26;
+  const ticks=days.map((d,i)=>{ const dt=parse(d), n=dt.getUTCDate(), wd=dt.getUTCDay();
+    const major = showNum || wd===1 || n===1 || i===0;
+    return el('button',{class:'g-tick'+(d===c.weddingDate?' wed':'')+(d===selDay?' sel':''),style:`left:${i*dayW}px;width:${dayW}px`,title:fmtDay(d),onclick:()=>{ S.selDay=d; S.gSel=null; renderWho(); }},
+      showWd? el('span',{class:'wd',text:dt.toLocaleDateString(loc,{weekday:'narrow',timeZone:'UTC'})}):null,
+      major? el('b',{text:String(n)}):null); });
+  const months=[]; days.forEach((d,i)=>{ const dt=parse(d); if(i===0||dt.getUTCDate()===1) months.push(el('span',{class:'g-month',style:`left:${i*dayW+4}px`,text:dt.toLocaleDateString(loc,{month:'long',timeZone:'UTC'})})); });
+  inner.append(row('g-head', el('span',{class:'muted small',text:''}), [...months,...ticks], showWd?52:40));
+
+  // count row for chosen city
+  if(allPlaces.length){
     const cp = (S.filter && allPlaces.find(p=>norm(p)===norm(S.filter))) || allPlaces.find(isSantiago) || allPlaces[0];
     const inCp = p => isSantiago(cp) ? isSantiago(p) : norm(p)===norm(cp);
-    const sel=el('select',{class:'cntsel','aria-label':t('countIn'),onchange:e=>{ S.filter=e.target.value; renderWho(); }},
-      allPlaces.map(p=>el('option',{value:p,selected:norm(p)===norm(cp)},p)));
-    const cr=el('tr',{class:'cnt'}, el('td',{class:'name'}, el('span',{class:'cntlbl',text:t('countIn')}), sel));
+    const sel=el('select',{class:'cntsel','aria-label':t('countIn'),onchange:e=>{ S.filter=e.target.value; renderWho(); }}, allPlaces.map(p=>el('option',{value:p,selected:norm(p)===norm(cp)},p)));
     const cnt=days.map(d=>trips.filter(tr=>placesOn(tr,d).some(inCp)).length);
-    const max=Math.max(1,...cnt); const col=colorFor(cp);
-    days.forEach((d,i)=>{ const n=cnt[i]; cr.append(el('td',{class:'cntcell'}, n? el('span',{class:'n',text:String(n)}):null, n? el('span',{class:'b',style:'background:'+col+';opacity:'+(d===c.weddingDate?1:.55)+';height:'+Math.round(6+28*n/max)+'px'}):null)); });
-    tb.append(cr);
+    const max=Math.max(1,...cnt), col=colorFor(cp);
+    const bars=cnt.map((n,i)=> n? el('div',{class:'g-cnt',style:`left:${i*dayW}px;width:${dayW}px`},
+      dayW>=14? el('span',{text:String(n)}):null,
+      el('i',{style:`background:${col};opacity:${days[i]===c.weddingDate?1:.55};height:${Math.round(4+24*n/max)}px;width:${Math.max(3,Math.min(18,dayW-4))}px`})) : null);
+    inner.append(row('g-count', el('div',null, el('span',{class:'cntlbl',text:t('countIn')}), sel), bars, 50));
   }
-  trips.forEach(tr=>{
-    const canEdit = tr.id===S.me || S.isOwner;
-    const row=el('tr',{class: tr.id===S.me?'me':null},
-      el('td',{class:'name',title:tr.name}, el('span',{class:'av',text:(tr.name||'?').trim().slice(0,2).toUpperCase()}), tr.name||'—', canEdit? el('button',{class:'edit',title:'edit',onclick:()=>{ S.editingId=tr.id; renderEditor(); location.hash='mine'; showTab('mine'); }},'✎'):null));
-    // runs
-    let i=0;
-    while(i<days.length){
-      const key=placesOn(tr,days[i]); const k=key.join('→'); let j=i+1;
-      while(j<days.length && placesOn(tr,days[j]).join('→')===k) j++;
-      const span=j-i;
-      if(!key.length){ for(let q=i;q<j;q++) row.append(el('td',{class: days[q]===c.weddingDate?'wedcol':null})); }
-      else{
-        const cols=key.map(colorFor);
-        const bg= cols.length===1? cols[0] : `linear-gradient(90deg,${cols.join(',')})`;
-        const dim = S.filter && !key.some(p=>norm(p)===norm(S.filter));
-        const notes = tr.stops.filter(s=>key.includes(s.place.trim()) && s.note).map(s=>s.note).join(' · ');
-        row.append(el('td',{class:'seg',colspan:span}, el('div',{class:'bar'+(dim?' dim':'')+(cols.length===1&&isLight(cols[0])?' dark':''),style:'background:'+bg, title: k + (notes?'\n'+notes:'')}, span>=2? (span>=4 && key.length===1 ? k+' · '+fmtRange(days[i],days[j-1]) : k) : key[0].slice(0,3))));
-      }
-      i=j;
+
+  // bars
+  const barEl=(tr,s,top,h,text,color,selected)=>{
+    const a=clampIdx(s.from), b=clampIdx(s.to); const left=a*dayW+1, w=Math.max(4,(b-a+1)*dayW-2);
+    const fitsT = x => x && w >= x.length*7+14;
+    let label='';
+    if(S.gView==='person'){ const sp=shortPlace(s.place), dr=fmtRange(s.from,s.to);
+      for(const cand of [s.place+' · '+dr, sp+' · '+dr, s.place, sp, sp.slice(0,4)]) if(fitsT(cand)){ label=cand; break; } }
+    else label = fitsT(text)? text : '';
+    const fits = !!label;
+    const light=isLight(color);
+    const bar=el('button',{class:'g-bar'+(dim(s.place)?' dim':'')+(light?' dark':'')+(selected?' picked':''),style:`left:${left}px;top:${top}px;width:${w}px;height:${h}px;background:${color}`,
+      'aria-label':(tr.name||'')+' · '+s.place+' · '+fmtRange(s.from,s.to), onclick:e=>{ e.stopPropagation(); S.gSel={id:tr.id,from:s.from,place:s.place}; renderWho(); }},
+      label);
+    const out=[bar];
+    if(!fits && S.gView==='city' && text) out.push(el('span',{class:'g-out',style:`left:${left+w+6}px;top:${top}px;height:${h}px`,text}));
+    return out;
+  };
+  const inRange = s => s.place && s.from && s.to && s.to>=days[0] && s.from<=days[days.length-1];
+  const isPicked = (tr,s)=> S.gSel && S.gSel.id===tr.id && S.gSel.from===s.from && S.gSel.place===s.place;
+
+  if(S.gView==='city'){
+    const groups=allPlaces.filter(p=>!S.filter || !dim(p)).map(p=>{
+      const items=[]; trips.forEach(tr=>tr.stops.forEach(s=>{ if(inRange(s) && (isSantiago(p)? isSantiago(s.place) : norm(s.place)===norm(p))) items.push([tr,s]); }));
+      items.sort((x,y)=>x[1].from.localeCompare(y[1].from)); return [p,items]; }).filter(g=>g[1].length);
+    groups.sort((a,b)=> (isSantiago(b[0])-isSantiago(a[0])) || a[1][0][1].from.localeCompare(b[1][0][1].from));
+    groups.forEach(([p,items])=>{
+      inner.append(el('div',{class:'g-group'}, el('div',{class:'g-lab g-glab',style:`width:${labelW}px`}, el('i',{style:'background:'+colorFor(p)}), el('span',{text:p}), el('em',{text:String(new Set(items.map(x=>x[0].id)).size)}))));
+      items.forEach(([tr,s])=> inner.append(row(tr.id===S.me?'me':'', el('span',{class:'nm',text:tr.name||'—'}), barEl(tr,s,6,26,fmtRange(s.from,s.to),colorFor(p),isPicked(tr,s)), 38)));
+    });
+  } else {
+    trips.forEach(tr=>{
+      const stops=tr.stops.filter(inRange).slice().sort((a,b)=>a.from.localeCompare(b.from));
+      const lanes=[]; const placed=stops.map(s=>{ let l=lanes.findIndex(end=>end<s.from); if(l<0){ l=lanes.length; lanes.push(s.to); } else lanes[l]=s.to; return [s,l]; });
+      const nL=Math.max(1,lanes.length), bh=nL>1?22:28, h=nL*(bh+4)+8;
+      const kids=placed.flatMap(([s,l])=>barEl(tr,s,6+l*(bh+4),bh,s.place+' · '+fmtRange(s.from,s.to),colorFor(s.place),isPicked(tr,s)));
+      const canEdit = tr.id===S.me || S.isOwner;
+      inner.append(row(tr.id===S.me?'me':'', el('div',{class:'g-name'}, el('span',{class:'nm',text:tr.name||'—'}),
+        canEdit? el('button',{class:'edit','aria-label':t('edTitle'),onclick:()=>{ S.editingId=tr.id; draftFor=undefined; renderEditor(); location.hash='mine'; showTab('mine'); window.scrollTo({top:0}); }},'✎'):null), kids, h));
+    });
+  }
+  box.append(scroll);
+
+  // picked bar detail
+  if(S.gSel){
+    const tr=S.trips.get(S.gSel.id); const s=tr && tr.stops.find(x=>x.from===S.gSel.from && x.place===S.gSel.place);
+    if(tr && s){
+      const canEdit = tr.id===S.me || S.isOwner;
+      $('#gpop').append(el('div',{class:'gpop'}, el('i',{style:'background:'+colorFor(s.place)}),
+        el('div',{class:'gp-txt'}, el('b',{text:(tr.name||'—')+' · '+s.place}), el('span',{text:fmtRange(s.from,s.to)+(s.note?' · '+s.note:'')})),
+        canEdit? el('button',{class:'btn',onclick:()=>{ S.editingId=tr.id; draftFor=undefined; renderEditor(); location.hash='mine'; showTab('mine'); window.scrollTo({top:0}); }},'✎'):null,
+        el('button',{class:'btn ghost','aria-label':'×',onclick:()=>{ S.gSel=null; renderWho(); }},'×')));
     }
-    tb.append(row);
-  });
-  tbl.append(tb);
-  if(!trips.length && (S.dbState==='ready')){ tbl.replaceChildren(el('tr',null, el('td',{class:'empty muted',text:t('empty')}))); }
+  }
+  // zoomed: open scrolled to the selected/wedding day
+  if(S.gZoom){
+    if(!S.didScroll && $('#v-who').classList.contains('on')){ S.didScroll=true; const i=idx(selDay); S.gScrollLeft = i>=0 ? Math.max(0,i*dayW - dayW*2) : 0; }
+    scroll.scrollLeft = S.gScrollLeft||0;
+    scroll.addEventListener('scroll',()=>{ S.gScrollLeft=scroll.scrollLeft; },{passive:true});
+  }
   renderDayPanel(trips);
   renderPeopleList(trips);
 }
